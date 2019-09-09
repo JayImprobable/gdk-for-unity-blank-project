@@ -26,8 +26,6 @@ public class FireClient : MonoBehaviour
         {
             if (Physics.Raycast(firingPoint.transform.position, firingPoint.transform.forward, out var hit, GameConstants.MaxFireDistance, hitMask))
             {
-                //HealthModifier request = new HealthModifier(weaponsReader.Data.MachineGunDamage);
-                //healthCommandSender.SendUpdateHealthCommand(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId, request, OnCommandSent);
                 HitValidator request = new HitValidator(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId.Id, weaponsReader.Data.MachineGunDamage);
                 healthCommandSender.SendValidateHitCommand(entityId, request, OnCommandSent);
             }
@@ -38,7 +36,7 @@ public class FireClient : MonoBehaviour
     {
         if (response.StatusCode != StatusCode.Success)
         {
-            Debug.LogWarning($"Hit validation message request response = {response.Message}");
+            Debug.LogWarning($"Hit validation request response = {response.Message}");
         }
     }
 }
