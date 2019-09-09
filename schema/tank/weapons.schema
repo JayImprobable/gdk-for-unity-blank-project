@@ -1,0 +1,14 @@
+package tank;
+
+enum WeaponTypes
+{
+    MACHINE_GUN = 0;
+    CANNON = 1;
+}
+
+component Weapons
+{
+    id = 20004;
+    int32 machine_gun_damage = 1;
+    int32 cannon_damage = 2;
+}

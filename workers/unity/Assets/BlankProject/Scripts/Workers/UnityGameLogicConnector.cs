@@ -1,7 +1,10 @@
 ﻿using BlankProject.Scripts.Config;
 using Improbable.Gdk.Core;
+using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.TransformSynchronization;
 using Improbable.Worker.CInterop;
+using Unity.Entities;
 using UnityEngine;
 
 namespace BlankProject
@@ -9,6 +12,10 @@ namespace BlankProject
     public class UnityGameLogicConnector : WorkerConnector
     {
         public const string WorkerType = "UnityGameLogic";
+        
+        [SerializeField] private GameObject level;
+
+        private GameObject levelInstance;
 
         private async void Start()
         {
@@ -41,6 +48,25 @@ namespace BlankProject
         {
             Worker.World.GetOrCreateSystem<MetricSendSystem>();
             PlayerLifecycleHelper.AddServerSystems(Worker.World);
+
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
+            
+            TransformSynchronizationHelper.AddServerSystems(Worker.World);
+            
+            if (level == null)
+            {
+                return;
+            }
+            levelInstance = Instantiate(level, transform.position, transform.rotation);
+        }
+        
+        void Dispose()
+        {
+            if (levelInstance != null)
+            {
+                Destroy(levelInstance);
+            }
+            base.Dispose();
         }
     }
 }

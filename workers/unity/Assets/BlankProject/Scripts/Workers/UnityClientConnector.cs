@@ -1,6 +1,8 @@
 ﻿using System;
 using Improbable.Gdk.Core;
+using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.TransformSynchronization;
 using Improbable.Worker.CInterop;
 using UnityEngine;
 
@@ -9,6 +11,10 @@ namespace BlankProject
     public class UnityClientConnector : WorkerConnector
     {
         public const string WorkerType = "UnityClient";
+
+        [SerializeField] private GameObject level;
+
+        private GameObject levelInstance;
 
         private async void Start()
         {
@@ -44,6 +50,27 @@ namespace BlankProject
         protected override void HandleWorkerConnectionEstablished()
         {
             PlayerLifecycleHelper.AddClientSystems(Worker.World);
+            
+            var fallbackCreator = new GameObjectCreatorFromMetadata(Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);
+            var customCreator = new PlayerGameObjectCreator(fallbackCreator, Worker.World, Worker.WorkerType);
+            
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World, customCreator);
+            TransformSynchronizationHelper.AddClientSystems(Worker.World);
+
+            if (level == null)
+            {
+                return;
+            }
+            levelInstance = Instantiate(level, transform.position, transform.rotation);
+        }
+
+        void Dispose()
+        {
+            if (levelInstance != null)
+            {
+                Destroy(levelInstance);
+            }
+            base.Dispose();
         }
     }
 }
