@@ -52,7 +52,7 @@ namespace BlankProject
             PlayerLifecycleHelper.AddClientSystems(Worker.World);
             
             var fallbackCreator = new GameObjectCreatorFromMetadata(Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);
-            var customCreator = new PlayerGameObjectCreator(fallbackCreator, Worker.World, Worker.WorkerType);
+            var customCreator = new CustomGameObjectCreator(fallbackCreator, Worker.World, Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);
             
             GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World, customCreator);
             TransformSynchronizationHelper.AddClientSystems(Worker.World);

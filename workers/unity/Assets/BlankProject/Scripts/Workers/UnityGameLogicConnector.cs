@@ -50,7 +50,7 @@ namespace BlankProject
             PlayerLifecycleHelper.AddServerSystems(Worker.World);
 
             GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
-            
+
             TransformSynchronizationHelper.AddServerSystems(Worker.World);
             
             if (level == null)

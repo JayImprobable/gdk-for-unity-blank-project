@@ -26,14 +26,12 @@ public class UpdateHealth : MonoBehaviour
         {
             updatedHealth = GameConstants.MaxHealth;
         }
-        else if (updatedHealth <= 0)
-        {
-            //worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId), OnDeleteEntityResponse);
-        }
+
         Health.Update update = new Health.Update
         {
             Health = updatedHealth
         };
+        Debug.Log($"new health = {update.Health} - origin = {entityId}");
         healthWriter.SendUpdate(update);
         healthCommandReceiver.SendUpdateHealthResponse(request.RequestId, new Empty());
     }

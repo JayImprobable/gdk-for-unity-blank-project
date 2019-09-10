@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 4022238995574314499}
   - component: {fileID: 5514821084970341655}
   - component: {fileID: 1538891425854179520}
+  - component: {fileID: 6966349741634107369}
   m_Layer: 9
   m_Name: Player
   m_TagString: Tank
@@ -284,7 +285,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4941401846199667446}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -361,8 +362,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3416288cd42dc4a44812554440de549b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 9072950058002843890}
   canvasTransform: {fileID: 444697161023032437}
+--- !u!114 &6966349741634107369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941401846199667446}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4993065f65591fc4cabefeef8d5bb1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foregroundImage: {fileID: 9072950058002843890}
 --- !u!1 &4941401846199667450
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,10 +606,25 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4242569612547976405, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
+    - target: {fileID: 7505412167032299481, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
         type: 3}
-      propertyPath: m_FillAmount
-      value: 1
+      propertyPath: m_AnchoredPosition.x
+      value: 0.089
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505412167032299481, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0584
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505412167032299481, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.0782
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505412167032299481, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.2116
       objectReference: {fileID: 0}
     - target: {fileID: 4242569612547976405, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
         type: 3}

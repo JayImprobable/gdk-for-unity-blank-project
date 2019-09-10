@@ -4,6 +4,7 @@ using Improbable.Gdk.PlayerLifecycle;
 using Improbable.Gdk.TransformSynchronization;
 using Tank;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace BlankProject.Scripts.Config
 {
@@ -31,6 +32,22 @@ namespace BlankProject.Scripts.Config
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
+
+            return template;
+        }
+
+        public static EntityTemplate CreateCannonballEntityTemplate(string workerId, Vector3 position)
+        {
+            var clientAttribute = EntityTemplate.GetWorkerAccessAttribute(workerId);
+            var serverAttribute = UnityGameLogicConnector.WorkerType;
+            
+            var template = new EntityTemplate();
+            template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
+            template.AddComponent(new Metadata.Snapshot("Cannonball"), serverAttribute);
+            
+            TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
             template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
