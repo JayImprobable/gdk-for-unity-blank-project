@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cannonball;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -101,10 +103,13 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         string pathToPrefab = $"Prefabs/{workerType}/Cannonball";
         var prefab = Resources.Load<GameObject>(pathToPrefab);
         var position = spatialOSPosition.Coords.ToUnityVector() + workerOrigin;
-        var rotation = GameObject.Find("CannonFiringPoint").GetComponent<Transform>().rotation;
+        entity.TryGetComponent<Rotation.Component>(out var rotation);
 
-        var gameObject = UnityEngine.Object.Instantiate(prefab, position, rotation);
+        var gameObject = UnityEngine.Object.Instantiate(prefab, position, Quaternion.Euler(rotation.Rotation.X, rotation.Rotation.Y, rotation.Rotation.Z));
         gameObject.name = $"{metadata.EntityType}(SpatialOS: {entity.SpatialOSEntityId}, Worker: {workerType})";
+
+
+        //Debug.Log($"Creating custom object... {gameObject.name}");
         Type[] componentsToAdd =
         {
             typeof(Transform),

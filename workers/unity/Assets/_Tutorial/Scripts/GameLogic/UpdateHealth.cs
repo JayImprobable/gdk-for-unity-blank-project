@@ -31,7 +31,6 @@ public class UpdateHealth : MonoBehaviour
         {
             Health = updatedHealth
         };
-        Debug.Log($"new health = {update.Health} - origin = {entityId}");
         healthWriter.SendUpdate(update);
         healthCommandReceiver.SendUpdateHealthResponse(request.RequestId, new Empty());
     }

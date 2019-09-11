@@ -1,0 +1,14 @@
+package cannonball;
+
+type CannonballRotation
+{
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+component Rotation
+{
+    id = 20010;
+
+    CannonballRotation rotation = 1;
+}

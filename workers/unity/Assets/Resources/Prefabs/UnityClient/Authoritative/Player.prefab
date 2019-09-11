@@ -476,6 +476,7 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 512
+  cannonFireDelay: 0.5
 --- !u!114 &9050220079152172656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8521160939304809522}
   m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 0.566, z: 1.179}
+  m_LocalPosition: {x: 0, y: 0.68, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4941401846200096542}

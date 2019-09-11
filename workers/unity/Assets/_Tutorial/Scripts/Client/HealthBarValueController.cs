@@ -27,7 +27,6 @@ public class HealthBarValueController : MonoBehaviour
     
     private void OnHealthUpdate(Health.Update update)
     {
-        Debug.Log($"Update value = " + update.Health.Value);
         if (!update.Health.HasValue)
         {
             return;
@@ -35,7 +34,6 @@ public class HealthBarValueController : MonoBehaviour
 
         if (update.Health.Value <= 0)
         {
-            Debug.Log($"HIT");
             Destroy(gameObject);
             worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId));
         }
