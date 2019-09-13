@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cannonball;
 using Improbable;
 using Improbable.Gdk.Core;
@@ -8,7 +6,6 @@ using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

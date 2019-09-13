@@ -15,7 +15,7 @@ public class HealthBarValueController : MonoBehaviour
     [Require] private EntityId entityId;
     [Require] private HealthReader healthReader;
     [Require] private WorldCommandSender worldCommandSender;
-    
+
     [SerializeField] Image foregroundImage;
 
     private void OnEnable()
@@ -31,13 +31,10 @@ public class HealthBarValueController : MonoBehaviour
         {
             return;
         }
-
         if (update.Health.Value <= 0)
         {
             Destroy(gameObject);
-            worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId));
         }
-
         float fillAmount = (float)update.Health.Value / 100;
         foregroundImage.fillAmount = fillAmount;
     }
