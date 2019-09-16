@@ -17,6 +17,8 @@ public class ValidateHit : MonoBehaviour
     [Require] private HealthCommandReceiver healthCommandReceiver;
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
+    [Require] private WeaponsReader weaponsReader;
+    [Require] private WorkerFlagReader workerFlagReader;
 
     private int damage;
     private EntityId entityIdHit;
@@ -25,12 +27,13 @@ public class ValidateHit : MonoBehaviour
     private void OnEnable()
     {
         healthCommandReceiver.OnValidateHitRequestReceived += OnValidateHit;
+        workerFlagReader.OnWorkerFlagChange += UpdateDamageValue;
         workerOrigin = gameObject.GetComponent<LinkedEntityComponent>().Worker.Origin;
+        damage = weaponsReader.Data.MachineGunDamage;
     }
 
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)
     {
-        damage = request.Payload.Damage;
         entityIdHit = new EntityId(request.Payload.EntityIdHit);
         worldCommandSender.SendEntityQueryCommand(
             new WorldCommands.EntityQuery.Request(
@@ -70,5 +73,10 @@ public class ValidateHit : MonoBehaviour
         {
             Debug.LogWarning($"Update Health request response = {response.Message}");
         }
+    }
+    
+    private void UpdateDamageValue(string value, string key)
+    {
+        damage = int.Parse(key);
     }
 }

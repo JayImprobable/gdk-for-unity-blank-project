@@ -5,7 +5,6 @@ import "improbable/gdk/core/common.schema";
 type HitValidator
 {
     int64 entity_id_hit = 1;
-    int32 damage = 2;
 }
 
 type HealthModifier

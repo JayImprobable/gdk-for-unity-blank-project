@@ -14,7 +14,7 @@ public class TankMovement : MonoBehaviour
     [SerializeField] private float turretTurnSpeed = 180f;
     [SerializeField] private GameObject turret;
 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
     private float movementInput;
     private float turnInput;
     private float turretInput;

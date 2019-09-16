@@ -1,21 +1,22 @@
 {
   "template": "w2_r0500_e5",
   "world": {
-    "chunkEdgeLengthMeters": 50,
+    "chunkEdgeLengthMeters":25,
     "snapshots": {
       "snapshotWritePeriodSeconds": 0
     },
     "dimensions": {
-      "xMeters": 5000,
-      "zMeters": 5000
+      "xMeters": 100,
+      "zMeters": 100
     }
   },
   "load_balancing": {
     "layer_configurations": [
       {
         "layer": "UnityGameLogic",
-        "hex_grid": {
-          "num_workers": 2
+        "rectangle_grid": {
+          "cols": 2,
+          "rows": 1
         }
       }
     ]
@@ -23,6 +24,12 @@
   "workers": [
     {
       "worker_type": "UnityGameLogic",
+      "flags": [
+        {
+          "name": "myproject_machinegun_damage",
+          "value": "3"
+        }
+      ],
       "permissions": [
         {
           "all": {}

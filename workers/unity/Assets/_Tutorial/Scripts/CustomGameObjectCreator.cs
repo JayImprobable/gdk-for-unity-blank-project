@@ -1,5 +1,4 @@
 using System;
-using Cannonball;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.GameObjectCreation;
@@ -38,11 +37,7 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
             case "Player":
                 CreatePlayer(entity, linker);
                 break;
-            
-            case "Cannonball":
-                CreateCannonball(entity, linker);
-                break;
-            
+
             default:
                 fallbackCreator.OnEntityCreated(entity, linker);
                 break;
@@ -87,34 +82,5 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         };
         linker.LinkGameObjectToSpatialOSEntity(entity.SpatialOSEntityId, (GameObject) playerGameObject,
             componentsToAdd);
-    }
-
-    private void CreateCannonball(SpatialOSEntity entity, EntityGameObjectLinker linker)
-    {
-        if (!entity.TryGetComponent<Metadata.Component>(out var metadata) ||
-            !entity.TryGetComponent<Position.Component>(out var spatialOSPosition))
-        {
-            return;
-        }
-
-        string pathToPrefab = $"Prefabs/{workerType}/Cannonball";
-        var prefab = Resources.Load<GameObject>(pathToPrefab);
-        var position = spatialOSPosition.Coords.ToUnityVector() + workerOrigin;
-        entity.TryGetComponent<Rotation.Component>(out var rotation);
-
-        var gameObject = UnityEngine.Object.Instantiate(prefab, position, Quaternion.Euler(rotation.Rotation.X, rotation.Rotation.Y, rotation.Rotation.Z));
-        gameObject.name = $"{metadata.EntityType}(SpatialOS: {entity.SpatialOSEntityId}, Worker: {workerType})";
-
-
-        //Debug.Log($"Creating custom object... {gameObject.name}");
-        Type[] componentsToAdd =
-        {
-            typeof(Transform),
-            typeof(Rigidbody),
-            typeof(MeshRenderer)
-        };
-        linker.LinkGameObjectToSpatialOSEntity(entity.SpatialOSEntityId, (GameObject) gameObject,
-            componentsToAdd);
-        gameObject.GetComponent<Rigidbody>().AddForce(gameObject.GetComponent<Transform>().forward * 750);
     }
 }

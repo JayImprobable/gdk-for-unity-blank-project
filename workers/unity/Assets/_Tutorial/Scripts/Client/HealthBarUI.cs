@@ -15,7 +15,7 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField] private Transform canvasTransform;
 
     private Vector3 canvasRootPosition;
-    private GameObject camera;
+    private new GameObject camera;
 
     private void OnEnable()
     {

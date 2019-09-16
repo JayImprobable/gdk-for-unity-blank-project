@@ -14,6 +14,8 @@ public class UpdateHealth : MonoBehaviour
     [Require] private HealthWriter healthWriter;
     [Require] private WorldCommandSender worldCommandSender;
 
+    private int machineGunDamage;
+
     private void OnEnable()
     {
         healthCommandReceiver.OnUpdateHealthRequestReceived += UpdateHealthCommandReceived;

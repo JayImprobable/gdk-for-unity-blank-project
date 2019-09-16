@@ -12,23 +12,11 @@ using UnityEngine;
 public class FireClient : MonoBehaviour
 {
     [Require] private EntityId entityId;
-    [Require] private WeaponsReader weaponsReader;
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
 
     [SerializeField] private GameObject firingPoint;
-    [SerializeField] private GameObject cannonFiringPoint;
     [SerializeField] private LayerMask hitMask;
-    [SerializeField] private float cannonFireDelay = 1f;
-
-    private LinkedEntityComponent linkedEntityComponent;
-    private bool fireCannon;
-
-    private void OnEnable()
-    {
-        linkedEntityComponent = gameObject.GetComponent<LinkedEntityComponent>();
-        fireCannon = true;
-    }
 
     private void Update()
     {
@@ -36,18 +24,9 @@ public class FireClient : MonoBehaviour
         {
             if (Physics.Raycast(firingPoint.transform.position, firingPoint.transform.forward, out var hit, GameConstants.MaxFireDistance, hitMask))
             {
-                HitValidator request = new HitValidator(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId.Id, weaponsReader.Data.MachineGunDamage);
+                HitValidator request = new HitValidator(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId.Id);
                 healthCommandSender.SendValidateHitCommand(entityId, request, OnCommandSent);
             }
-        }
-
-        if (Input.GetMouseButtonDown(1) && fireCannon)
-        {
-            var entityTemplate = EntityTemplates.CreateCannonballEntityTemplate(linkedEntityComponent.Worker.WorkerId, cannonFiringPoint.transform.position, cannonFiringPoint.transform.eulerAngles);
-            WorldCommands.CreateEntity.Request request = new WorldCommands.CreateEntity.Request(entityTemplate);
-            worldCommandSender.SendCreateEntityCommand(request, CannonballEntityCreated);
-            fireCannon = false;
-            StartCoroutine("SetFireCannon");
         }
     }
 
@@ -57,15 +36,5 @@ public class FireClient : MonoBehaviour
         {
             Debug.LogWarning($"Hit validation request response = {response.Message}");
         }
-    }
-
-    private void CannonballEntityCreated(WorldCommands.CreateEntity.ReceivedResponse response)
-    {
-    }
-
-    IEnumerator SetFireCannon()
-    {
-        yield return new WaitForSeconds(cannonFireDelay);
-        fireCannon = true;
     }
 }

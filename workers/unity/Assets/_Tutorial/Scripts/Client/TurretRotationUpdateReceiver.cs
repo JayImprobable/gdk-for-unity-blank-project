@@ -18,7 +18,6 @@ public class TurretRotationUpdateReceiver : MonoBehaviour
 
     void UpdateReceived(TurretRotation.Update update)
     {
-        Debug.Log($"Rotate?");
         turretTransform.Rotate(0, update.Rotation, 0);
     }
 }

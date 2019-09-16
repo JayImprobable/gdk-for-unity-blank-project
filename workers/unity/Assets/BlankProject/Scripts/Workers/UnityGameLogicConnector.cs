@@ -60,7 +60,7 @@ namespace BlankProject
             levelInstance = Instantiate(level, transform.position, transform.rotation);
         }
         
-        void Dispose()
+        public override void Dispose()
         {
             if (levelInstance != null)
             {
