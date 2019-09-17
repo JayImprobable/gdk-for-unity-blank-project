@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
@@ -12,9 +13,14 @@ namespace BlankProject.Scripts.Config
     {
         public static EntityTemplate CreatePlayerEntityTemplate(string workerId, byte[] serializedArguments)
         {
+            IList<Vector3> spawnPoints = new List<Vector3>();
+            spawnPoints.Add(new Vector3(-35, 0, 20));
+            spawnPoints.Add(new Vector3(-37, 0, -35));
+            spawnPoints.Add(new Vector3(39, 0, 33));
+            spawnPoints.Add(new Vector3(23, 0, -35));
             var clientAttribute = EntityTemplate.GetWorkerAccessAttribute(workerId);
             var serverAttribute = UnityGameLogicConnector.WorkerType;
-            Vector3 position = new Vector3(0, 0, 0);
+            Vector3 position = spawnPoints[Random.Range(0, 3)];
 
             var turretRotationComponent = new TurretRotation.Snapshot();
             var colorComponent = new TankColor.Snapshot();

@@ -2,6 +2,7 @@ using System.IO;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.TransformSynchronization;
 using UnityEditor;
 using UnityEngine;
 using Snapshot = Improbable.Gdk.Core.Snapshot;
@@ -33,6 +34,7 @@ namespace BlankProject.Editor
         {
             var snapshot = new Snapshot();
 
+            AddTurret(snapshot);
             AddPlayerSpawner(snapshot);
             return snapshot;
         }
@@ -50,8 +52,28 @@ namespace BlankProject.Editor
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,
                 UnityGameLogicConnector.WorkerType,
-                MobileClientWorkerConnector.WorkerType);
+                MobileClientWorkerConnector.WorkerType,
+                UnityTurretConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
+
+            snapshot.AddEntity(template);
+        }
+
+        private static void AddTurret(Snapshot snapshot)
+        {
+            var turretAttribute = UnityTurretConnector.WorkerType;
+            
+            var template = new EntityTemplate();
+            template.AddComponent(new Position.Snapshot(new Coordinates(6, 0.5, 0)), turretAttribute);
+            template.AddComponent(new Metadata.Snapshot("Turret"), turretAttribute);
+            template.AddComponent(new Persistence.Snapshot(), turretAttribute);
+            
+            template.SetReadAccess(
+                UnityClientConnector.WorkerType,
+                UnityGameLogicConnector.WorkerType,
+                MobileClientWorkerConnector.WorkerType,
+                UnityTurretConnector.WorkerType);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, turretAttribute);
 
             snapshot.AddEntity(template);
         }

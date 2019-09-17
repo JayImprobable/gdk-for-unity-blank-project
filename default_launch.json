@@ -48,6 +48,14 @@
           "all": {}
         }
       ]
+    },
+    {
+      "worker_type": "UnityTurret",
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
     }
   ]
 }

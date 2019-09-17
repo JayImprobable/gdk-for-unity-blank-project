@@ -1,0 +1,126 @@
+{
+  "build": {
+    "tasks": [
+      {
+        "name": "Codegen",
+        "steps": [{"name": "** Load Unity to generate code **", "command": "echo", "arguments": ["No-op."]}]
+      },
+      {
+        "name": "build",
+        "steps": [{"name": "** Open Unity to build the turret worker. **", "command": "echo", "arguments": ["No-op."]}]
+      },
+      {
+        "name": "clean",
+        "steps": [{"name": "No-op", "command": "echo", "arguments": ["No-op."]}]
+      }
+    ]
+  },
+  "bridge": {
+    "worker_attribute_set": {
+      "attributes": [
+        "UnityTurret"
+      ]
+    },
+    "entity_interest": {
+      "range_entity_interest": {
+        "radius": 30
+      }
+    },
+    "component_delivery": {
+      "default": "RELIABLE_ORDERED",
+      "checkoutAllInitially": true
+    }
+  },
+  "external": {
+    "default": {
+      "run_type": "EXECUTABLE",
+      "windows": {
+        "command": "build/worker/UnityTurret@Windows/UnityTurret@Windows.exe",
+        "arguments": [
+          "+workerType",
+          "UnityTurret",
+          "-batchmode",
+          "-nographics",
+          "-logfile",
+          "../../logs/external-default-unityturret.log"
+        ]
+      },
+      "macos": {
+        "command": "open",
+        "arguments": [
+          "-n",
+          "./build/worker/UnityTurret@Mac/UnityTurret@Mac.app",
+          "--args",
+          "+workerType",
+          "UnityTurret",
+          "-batchmode",
+          "-nographics",
+          "-logfile",
+          "../../logs/external-default-unityTurret.log"
+        ]
+      }
+    }
+  },
+  "managed": {
+    "windows": {
+      "artifact_name": "UnityTurret@Windows.zip",
+      "command": "UnityTurret@Windows.exe",
+      "arguments": [
+        "+workerType",
+        "UnityTurret",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    },
+    "macos": {
+      "artifact_name": "UnityTurret@Mac.zip",
+      "command": "UnityTurret@Mac.app/Contents/MacOS/UnityTurret@Mac",
+      "arguments": [
+        "+workerType",
+        "UnityTurret",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    },
+    "linux": {
+      "artifact_name": "UnityTurret@Linux.zip",
+      "command": "UnityTurret@Linux",
+      "arguments": [
+        "+workerType",
+        "UnityTurret",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    }
+  }
+}
