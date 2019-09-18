@@ -1,4 +1,5 @@
-﻿using Improbable.Gdk.Core;
+﻿using System;
+using Improbable.Gdk.Core;
 using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.TransformSynchronization;
 using Improbable.Worker.CInterop;

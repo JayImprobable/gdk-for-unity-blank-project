@@ -1,0 +1,7 @@
+package turret;
+
+component TurretDamage
+{
+    id = 20100;
+    int32 turret_damage = 1;
+}

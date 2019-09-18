@@ -18,6 +18,13 @@
           "cols": 2,
           "rows": 1
         }
+      },
+      {
+        "layer": "UnityTurret",
+        "rectangle_grid":{
+          "cols": 1,
+          "rows": 1
+        }
       }
     ]
   },

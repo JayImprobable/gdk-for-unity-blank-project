@@ -38,7 +38,7 @@ namespace BlankProject.Scripts.Config
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
-            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityTurretConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             return template;
