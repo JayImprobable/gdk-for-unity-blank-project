@@ -8,6 +8,7 @@ using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Tank;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class HealthBarValueController : MonoBehaviour
@@ -15,6 +16,7 @@ public class HealthBarValueController : MonoBehaviour
     [Require] private EntityId entityId;
     [Require] private HealthReader healthReader;
     [Require] private WorldCommandSender worldCommandSender;
+    [Require] private WeaponsFxWriter weaponsFxWriter;
 
     [SerializeField] Image foregroundImage;
 
@@ -37,5 +39,6 @@ public class HealthBarValueController : MonoBehaviour
         }
         float fillAmount = (float)update.Health.Value / 100;
         foregroundImage.fillAmount = fillAmount;
+        weaponsFxWriter.SendDamageEffectEvent(new Empty());
     }
 }

@@ -14,6 +14,7 @@ public class FireClient : MonoBehaviour
     [Require] private EntityId entityId;
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
+    [Require] private WeaponsFxWriter weaponsFxWriter;
 
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private LayerMask hitMask;
@@ -27,6 +28,7 @@ public class FireClient : MonoBehaviour
                 HitValidator request = new HitValidator(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId.Id);
                 healthCommandSender.SendValidateHitCommand(entityId, request, OnCommandSent);
             }
+            weaponsFxWriter.SendMachineGunEffectEvent(new Empty());
         }
     }
 

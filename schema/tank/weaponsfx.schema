@@ -1,0 +1,11 @@
+package tank;
+
+import "improbable/gdk/core/common.schema";
+
+component WeaponsFx
+{
+    id = 20005;
+
+    event improbable.gdk.core.Empty machine_gun_effect;
+    event improbable.gdk.core.Empty damage_effect;
+}

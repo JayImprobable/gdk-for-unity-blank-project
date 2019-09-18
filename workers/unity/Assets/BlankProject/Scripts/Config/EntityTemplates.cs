@@ -26,6 +26,7 @@ namespace BlankProject.Scripts.Config
             var colorComponent = new TankColor.Snapshot();
             var healthComponent = new Health.Snapshot(GameConstants.MaxHealth);
             var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage, GameConstants.CannonDamage);
+            var weaponsFxComponent = new WeaponsFx.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
@@ -34,6 +35,7 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(colorComponent, clientAttribute);
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
+            template.AddComponent(weaponsFxComponent, clientAttribute);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
