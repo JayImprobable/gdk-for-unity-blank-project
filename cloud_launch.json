@@ -1,7 +1,7 @@
 {
   "template": "w2_r0500_e5",
   "world": {
-    "chunkEdgeLengthMeters":25,
+    "chunkEdgeLengthMeters": 100,
     "snapshots": {
       "snapshotWritePeriodSeconds": 0
     },
@@ -53,6 +53,14 @@
     },
     {
       "worker_type": "MobileClient",
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
+    },
+    {
+      "worker_type": "UnityTurret",
       "permissions": [
         {
           "all": {}
