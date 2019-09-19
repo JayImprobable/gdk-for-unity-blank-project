@@ -1,14 +1,11 @@
-﻿using Improbable.Gdk.Core;
-using Improbable.Gdk.Subscriptions;
+﻿using Improbable.Gdk.Subscriptions;
 using Tank;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarValueController : MonoBehaviour
+public class HealthBarValueControllerNonAuthoritative : MonoBehaviour
 {
     [Require] private HealthReader healthReader;
-    [Require] private WeaponsFxWriter weaponsFxWriter;
-
     [SerializeField] Image foregroundImage;
 
     private void OnEnable()
@@ -30,6 +27,5 @@ public class HealthBarValueController : MonoBehaviour
         }
         float fillAmount = (float)update.Health.Value / 100;
         foregroundImage.fillAmount = fillAmount;
-        weaponsFxWriter.SendDamageEffectEvent(new Empty());
     }
 }

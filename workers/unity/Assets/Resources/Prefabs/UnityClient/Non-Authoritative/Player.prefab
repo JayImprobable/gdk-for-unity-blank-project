@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 4022238995574314499}
   - component: {fileID: 5514821084970341655}
   - component: {fileID: 1538891425854179520}
-  - component: {fileID: 6966349741634107369}
   - component: {fileID: 977950473199023395}
+  - component: {fileID: 4400245065233437998}
   m_Layer: 9
   m_Name: Player
   m_TagString: Tank
@@ -365,19 +365,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasTransform: {fileID: 444697161023032437}
---- !u!114 &6966349741634107369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941401846199667446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4993065f65591fc4cabefeef8d5bb1bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 9072950058002843890}
 --- !u!114 &977950473199023395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +379,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineGunFx: {fileID: 2258972976635235598}
   damageFx: {fileID: 8267908355123806807}
+--- !u!114 &4400245065233437998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941401846199667446}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ecc436c8c0d48458fd9a202f4a815b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foregroundImage: {fileID: 9072950058002843890}
 --- !u!1 &4941401846199667450
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,10 +513,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4941401846200096542}
     m_Modifications:
-    - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
-      propertyPath: m_Name
-      value: MachineGunFX
-      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.000010554959
@@ -560,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 400006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+      propertyPath: m_Name
+      value: MachineGunFX
       objectReference: {fileID: 0}
     - target: {fileID: 19800006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
       propertyPath: lengthInSec
@@ -686,11 +686,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4941401846200096534}
     m_Modifications:
-    - target: {fileID: 7580662423023095769, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 4693554701850929234, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -795,6 +790,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580662423023095769, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 4242569612547976405, guid: 17cd3eda8c2155c42bdac5e1fae4d8cf,
         type: 3}
