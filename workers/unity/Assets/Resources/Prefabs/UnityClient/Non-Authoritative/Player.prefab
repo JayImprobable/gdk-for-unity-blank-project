@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 4022238995574314499}
   - component: {fileID: 5514821084970341655}
   - component: {fileID: 1538891425854179520}
-  - component: {fileID: 6966349741634107369}
   - component: {fileID: 977950473199023395}
+  - component: {fileID: 8604228024516439237}
   m_Layer: 9
   m_Name: Player
   m_TagString: Tank
@@ -365,19 +365,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasTransform: {fileID: 444697161023032437}
---- !u!114 &6966349741634107369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941401846199667446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4993065f65591fc4cabefeef8d5bb1bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 9072950058002843890}
 --- !u!114 &977950473199023395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +379,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineGunFx: {fileID: 2258972976635235598}
   damageFx: {fileID: 8267908355123806807}
+--- !u!114 &8604228024516439237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941401846199667446}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ecc436c8c0d48458fd9a202f4a815b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foregroundImage: {fileID: 9072950058002843890}
 --- !u!1 &4941401846199667450
 GameObject:
   m_ObjectHideFlags: 0

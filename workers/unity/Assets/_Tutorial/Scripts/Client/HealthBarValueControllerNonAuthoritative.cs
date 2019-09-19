@@ -4,10 +4,9 @@ using Tank;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarValueController : MonoBehaviour
+public class HealthBarValueControllerNonAuthoritative : MonoBehaviour
 {
     [Require] private HealthReader healthReader;
-    [Require] private WeaponsFxWriter weaponsFxWriter;
 
     [SerializeField] Image foregroundImage;
 
@@ -26,12 +25,10 @@ public class HealthBarValueController : MonoBehaviour
         }
         if (update.Health.Value <= 0)
         {
-            //Destroy(gameObject);
             gameObject.SetActive(false);
             return;
         }
         float fillAmount = (float)update.Health.Value / 100;
         foregroundImage.fillAmount = fillAmount;
-        weaponsFxWriter.SendDamageEffectEvent(new Empty());
     }
 }
