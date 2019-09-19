@@ -8,4 +8,5 @@ component WeaponsFx
 
     event improbable.gdk.core.Empty machine_gun_effect;
     event improbable.gdk.core.Empty damage_effect;
+    event improbable.gdk.core.Empty heal_effect;
 }

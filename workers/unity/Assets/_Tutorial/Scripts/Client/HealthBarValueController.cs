@@ -29,7 +29,15 @@ public class HealthBarValueController : MonoBehaviour
             gameObject.SetActive(false);
         }
         float fillAmount = (float)update.Health.Value / 100;
+        if (fillAmount > foregroundImage.fillAmount)
+        {
+            weaponsFxWriter.SendHealEffectEvent(new Empty());
+        }
+        else if (fillAmount < foregroundImage.fillAmount)
+        {
+            weaponsFxWriter.SendDamageEffectEvent(new Empty());
+        }
         foregroundImage.fillAmount = fillAmount;
-        weaponsFxWriter.SendDamageEffectEvent(new Empty());
+        
     }
 }

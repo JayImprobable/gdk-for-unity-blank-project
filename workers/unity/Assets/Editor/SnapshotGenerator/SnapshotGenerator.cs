@@ -63,13 +63,13 @@ namespace BlankProject.Editor
         {
             var turretAttribute = UnityTurretConnector.WorkerType;
             
-            var turretDamage = new Turret.TurretDamage.Snapshot(GameConstants.turretDamage);
+            var turretHeal = new Turret.TurretHeal.Snapshot(GameConstants.turretHeal);
             
             var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(new Coordinates(6, 0.5, 0)), turretAttribute);
+            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), turretAttribute);
             template.AddComponent(new Metadata.Snapshot("Turret"), turretAttribute);
             template.AddComponent(new Persistence.Snapshot(), turretAttribute);
-            template.AddComponent(turretDamage, turretAttribute);
+            template.AddComponent(turretHeal, turretAttribute);
             
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,

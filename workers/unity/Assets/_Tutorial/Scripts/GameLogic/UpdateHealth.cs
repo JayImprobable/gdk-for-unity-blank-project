@@ -35,10 +35,6 @@ public class UpdateHealth : MonoBehaviour
         };
         healthWriter.SendUpdate(update);
         healthCommandReceiver.SendUpdateHealthResponse(request.RequestId, new Empty());
-//        if (updatedHealth <= 0)
-//        {
-//            worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId));
-//        }
     }
 
     void OnDeleteEntityResponse(WorldCommands.DeleteEntity.ReceivedResponse response)

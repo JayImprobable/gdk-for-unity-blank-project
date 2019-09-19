@@ -8,5 +8,5 @@ public static class GameConstants
     public static float MaxFireDistance = 30f;
     public static int MachineGunDamage = 5;
     public static int CannonDamage = 25;
-    public static int turretDamage = 3;
+    public static int turretHeal = 3;
 }
