@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using BlankProject.Scripts.Config;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Tank;
+using Cannonball;
 using UnityEngine;
 
 public class FireClient : MonoBehaviour
@@ -15,11 +14,13 @@ public class FireClient : MonoBehaviour
     [Require] private WeaponsReader weaponsReader;
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
+    [Require] private FireCannonballWriter fireCannonball;
 
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private GameObject cannonFiringPoint;
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private float cannonFireDelay = 1f;
+    [SerializeField] private GameObject cannonballGameObject;
 
     private LinkedEntityComponent linkedEntityComponent;
     private bool fireCannon;
@@ -43,11 +44,18 @@ public class FireClient : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && fireCannon)
         {
-            var entityTemplate = EntityTemplates.CreateCannonballEntityTemplate(linkedEntityComponent.Worker.WorkerId, cannonFiringPoint.transform.position, cannonFiringPoint.transform.eulerAngles);
-            WorldCommands.CreateEntity.Request request = new WorldCommands.CreateEntity.Request(entityTemplate);
-            worldCommandSender.SendCreateEntityCommand(request, CannonballEntityCreated);
+            
+            GameObject go = GameObject.Instantiate(cannonballGameObject, cannonFiringPoint.transform.position,
+                cannonFiringPoint.transform.rotation);
+            go.GetComponent<Rigidbody>().AddForce(gameObject.GetComponent<Transform>().forward * GameConstants.CannonForce);
+            fireCannonball.SendFireEvent(new Empty());
             fireCannon = false;
-            StartCoroutine("SetFireCannon");
+            StartCoroutine(nameof(SetFireCannon));
+//            Debug.Break();
+            
+//            var entityTemplate = EntityTemplates.CreateCannonballEntityTemplate(linkedEntityComponent.Worker.WorkerId, cannonFiringPoint.transform.position, cannonFiringPoint.transform.eulerAngles);
+//            WorldCommands.CreateEntity.Request request = new WorldCommands.CreateEntity.Request(entityTemplate);
+//            worldCommandSender.SendCreateEntityCommand(request, CannonballEntityCreated);
         }
     }
 

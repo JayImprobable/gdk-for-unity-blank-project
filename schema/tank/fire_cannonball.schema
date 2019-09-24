@@ -1,0 +1,10 @@
+package cannonball;
+
+import "improbable/gdk/core/common.schema";
+
+component FireCannonball
+{
+    id = 20011;
+
+    event improbable.gdk.core.Empty fire;
+}

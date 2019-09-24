@@ -21,6 +21,7 @@ namespace BlankProject.Scripts.Config
             var colorComponent = new TankColor.Snapshot();
             var healthComponent = new Health.Snapshot(GameConstants.MaxHealth);
             var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage, GameConstants.CannonDamage);
+            var fireCannon = new FireCannonball.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
@@ -29,6 +30,7 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(colorComponent, clientAttribute);
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
+            template.AddComponent(fireCannon, clientAttribute);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
@@ -45,13 +47,13 @@ namespace BlankProject.Scripts.Config
             var serverAttribute = UnityGameLogicConnector.WorkerType;
             
             var startRotation = new Rotation.Snapshot(new CannonballRotation(rotation.x, rotation.y, rotation.z));
-            
+
             var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
+            template.AddComponent(new Position.Snapshot(position.ToCoordinates()), serverAttribute);
             template.AddComponent(new Metadata.Snapshot("Cannonball"), serverAttribute);
-            template.AddComponent(startRotation, clientAttribute);
+            template.AddComponent(startRotation, serverAttribute);
             
-            TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
+            TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, serverAttribute, position);
             template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 

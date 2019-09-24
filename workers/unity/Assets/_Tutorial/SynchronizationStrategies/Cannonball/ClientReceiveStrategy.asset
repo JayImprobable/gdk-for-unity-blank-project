@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ClientReceiveStrategy
   m_EditorClassIdentifier: 
   WorkerType: UnityClient
-  TargetBufferSize: 20
-  MaxBufferSize: 40
+  TargetBufferSize: 2
+  MaxBufferSize: 20

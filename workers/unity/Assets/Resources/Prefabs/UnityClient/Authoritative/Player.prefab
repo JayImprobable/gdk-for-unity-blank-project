@@ -477,6 +477,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cannonFireDelay: 0.5
+  cannonballGameObject: {fileID: 122297184863550558, guid: ebd7eb773f198d04a94a925cba0a8f4e,
+    type: 3}
 --- !u!114 &9050220079152172656
 MonoBehaviour:
   m_ObjectHideFlags: 0
