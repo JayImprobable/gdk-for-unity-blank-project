@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using BlankProject.Scripts.Config;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Tank;
+using Cannonball;
 using UnityEngine;
 
 public class FireClient : MonoBehaviour
@@ -15,9 +14,22 @@ public class FireClient : MonoBehaviour
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
     [Require] private WeaponsFxWriter weaponsFxWriter;
+    [Require] private FireCannonballWriter fireCannonball;
 
     [SerializeField] private GameObject firingPoint;
+    [SerializeField] private GameObject cannonFiringPoint;
     [SerializeField] private LayerMask hitMask;
+    [SerializeField] private float cannonFireDelay = 1f;
+    [SerializeField] private GameObject cannonballGameObject;
+
+    private LinkedEntityComponent linkedEntityComponent;
+    private bool fireCannon;
+
+    private void OnEnable()
+    {
+        linkedEntityComponent = gameObject.GetComponent<LinkedEntityComponent>();
+        fireCannon = true;
+    }
 
     private void Update()
     {
@@ -30,6 +42,22 @@ public class FireClient : MonoBehaviour
             }
             weaponsFxWriter.SendMachineGunEffectEvent(new Empty());
         }
+
+        if (Input.GetMouseButtonDown(1) && fireCannon)
+        {
+            
+            GameObject go = GameObject.Instantiate(cannonballGameObject, cannonFiringPoint.transform.position,
+                cannonFiringPoint.transform.rotation);
+            go.GetComponent<Rigidbody>().AddForce(gameObject.GetComponent<Transform>().forward * GameConstants.CannonForce);
+            fireCannonball.SendFireEvent(new Empty());
+            fireCannon = false;
+            StartCoroutine(nameof(SetFireCannon));
+//            Debug.Break();
+            
+//            var entityTemplate = EntityTemplates.CreateCannonballEntityTemplate(linkedEntityComponent.Worker.WorkerId, cannonFiringPoint.transform.position, cannonFiringPoint.transform.eulerAngles);
+//            WorldCommands.CreateEntity.Request request = new WorldCommands.CreateEntity.Request(entityTemplate);
+//            worldCommandSender.SendCreateEntityCommand(request, CannonballEntityCreated);
+        }
     }
 
     private void OnCommandSent(Health.ValidateHit.ReceivedResponse response)
@@ -38,5 +66,15 @@ public class FireClient : MonoBehaviour
         {
             Debug.LogWarning($"Hit validation request response = {response.Message}");
         }
+    }
+
+    private void CannonballEntityCreated(WorldCommands.CreateEntity.ReceivedResponse response)
+    {
+    }
+
+    IEnumerator SetFireCannon()
+    {
+        yield return new WaitForSeconds(cannonFireDelay);
+        fireCannon = true;
     }
 }

@@ -29,16 +29,29 @@ public class UpdateHealth : MonoBehaviour
             updatedHealth = GameConstants.MaxHealth;
         }
 
-        Health.Update update = new Health.Update
-        {
-            Health = updatedHealth
-        };
-        healthWriter.SendUpdate(update);
+        SendHealthUpdate(updatedHealth);
+        
         healthCommandReceiver.SendUpdateHealthResponse(request.RequestId, new Empty());
     }
 
-    void OnDeleteEntityResponse(WorldCommands.DeleteEntity.ReceivedResponse response)
+    public void TakeCannonballDamage(int value)
     {
-        Debug.LogWarning($"Entity {entityId} deleted");
+        var updatedHealth = healthWriter.Data.Health + value;
+
+        SendHealthUpdate(updatedHealth);
+        
+        if (updatedHealth <= 0)
+        {
+            worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId));
+        }
+    }
+
+    private void SendHealthUpdate(int value)
+    {
+        Health.Update update = new Health.Update
+        {
+            Health = value
+        };
+        healthWriter.SendUpdate(update);
     }
 }

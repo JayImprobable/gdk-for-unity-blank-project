@@ -27,6 +27,7 @@ namespace BlankProject.Scripts.Config
             var healthComponent = new Health.Snapshot(GameConstants.MaxHealth);
             var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage, GameConstants.CannonDamage);
             var weaponsFxComponent = new WeaponsFx.Snapshot();
+            var fireCannon = new FireCannonball.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
@@ -36,11 +37,32 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
             template.AddComponent(weaponsFxComponent, clientAttribute);
+            template.AddComponent(fireCannon, clientAttribute);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
             template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityTurretConnector.WorkerType);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
+
+            return template;
+        }
+
+        public static EntityTemplate CreateCannonballEntityTemplate(string workerId, Vector3 position, Vector3 rotation)
+        {
+            var clientAttribute = EntityTemplate.GetWorkerAccessAttribute(workerId);
+            var serverAttribute = UnityGameLogicConnector.WorkerType;
+            
+            var startRotation = new Rotation.Snapshot(new CannonballRotation(rotation.x, rotation.y, rotation.z));
+
+            var template = new EntityTemplate();
+            template.AddComponent(new Position.Snapshot(position.ToCoordinates()), serverAttribute);
+            template.AddComponent(new Metadata.Snapshot("Cannonball"), serverAttribute);
+            template.AddComponent(startRotation, serverAttribute);
+            
+            TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, serverAttribute, position);
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
+>>>>>>> cannonball
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             return template;
