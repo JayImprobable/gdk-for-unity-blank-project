@@ -5,7 +5,6 @@ using Improbable.Gdk.Core.Commands;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Tank;
-using Cannonball;
 using UnityEngine;
 
 public class FireClient : MonoBehaviour

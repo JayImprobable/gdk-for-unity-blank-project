@@ -63,7 +63,7 @@ namespace BlankProject.Editor
         {
             var turretAttribute = UnityTurretConnector.WorkerType;
             
-            var turretHeal = new Turret.TurretHeal.Snapshot(GameConstants.turretHeal);
+            var turretHeal = new Turret.TurretHeal.Snapshot(GameConstants.TurretHeal);
             
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), turretAttribute);

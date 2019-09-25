@@ -1,4 +1,4 @@
-package cannonball;
+package tank;
 
 import "improbable/gdk/core/common.schema";
 
