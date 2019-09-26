@@ -46,24 +46,5 @@ namespace BlankProject.Scripts.Config
 
             return template;
         }
-//
-//        public static EntityTemplate CreateCannonballEntityTemplate(string workerId, Vector3 position, Vector3 rotation)
-//        {
-//            var clientAttribute = EntityTemplate.GetWorkerAccessAttribute(workerId);
-//            var serverAttribute = UnityGameLogicConnector.WorkerType;
-//            
-//            var startRotation = new Rotation.Snapshot(new CannonballRotation(rotation.x, rotation.y, rotation.z));
-//
-//            var template = new EntityTemplate();
-//            template.AddComponent(new Position.Snapshot(position.ToCoordinates()), serverAttribute);
-//            template.AddComponent(new Metadata.Snapshot("Cannonball"), serverAttribute);
-//            template.AddComponent(startRotation, serverAttribute);
-//            
-//            TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, serverAttribute, position);
-//            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
-//            template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
-//
-//            return template;
-//        }
     }
 }

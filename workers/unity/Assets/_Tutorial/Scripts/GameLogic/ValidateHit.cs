@@ -29,7 +29,7 @@ public class ValidateHit : MonoBehaviour
         healthCommandReceiver.OnValidateHitRequestReceived += OnValidateHit;
         workerFlagReader.OnWorkerFlagChange += UpdateDamageValue;
         workerOrigin = gameObject.GetComponent<LinkedEntityComponent>().Worker.Origin;
-        damage = weaponsReader.Data.MachineGunDamage * -1;
+        damage = weaponsReader.Data.MachineGunDamage;
     }
 
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)

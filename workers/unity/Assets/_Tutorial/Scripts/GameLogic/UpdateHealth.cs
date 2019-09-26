@@ -23,6 +23,7 @@ public class UpdateHealth : MonoBehaviour
 
     private void UpdateHealthCommandReceived(Health.UpdateHealth.ReceivedRequest request)
     {
+        Debug.Log($"Update command received");
         var updatedHealth = healthWriter.Data.Health + request.Payload.Amount;
         if (updatedHealth > GameConstants.MaxHealth)
         {
