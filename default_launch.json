@@ -23,7 +23,7 @@
         }
       },
       {
-        "layer": "UnityTurret",
+        "layer": "UnityHealer",
         "rectangle_grid":{
           "cols": 1,
           "rows": 1
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "worker_type": "UnityTurret",
+      "worker_type": "UnityHealer",
       "permissions": [
         {
           "all": {}

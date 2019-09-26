@@ -15,12 +15,12 @@ public class VisualFXController : MonoBehaviour
 
     private void OnEnable()
     {
-        weaponsFxReader.OnMachineGunEffectEvent += FireMachineGunFX;
+        weaponsFxReader.OnMachineGunEffectEvent += FireMachineGunFx;
         weaponsFxReader.OnDamageEffectEvent += DamageFx;
         weaponsFxReader.OnHealEffectEvent += HealFx;
     }
 
-    private void FireMachineGunFX(Empty empty)
+    private void FireMachineGunFx(Empty empty)
     {
         machineGunFx.GetComponent<ParticleSystem>().Play();
     }

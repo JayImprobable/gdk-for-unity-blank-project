@@ -1,5 +1,4 @@
-﻿using System;
-using Improbable.Gdk.Core;
+﻿using Improbable.Gdk.Core;
 using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.TransformSynchronization;
 using Improbable.Worker.CInterop;
@@ -7,9 +6,9 @@ using UnityEngine;
 
 namespace BlankProject
 {
-    public class UnityTurretConnector : WorkerConnector
+    public class UnityHealerConnector : WorkerConnector
     {
-        public const string WorkerType = "UnityTurret";
+        public const string WorkerType = "UnityHealer";
 
         private async void Start()
         {

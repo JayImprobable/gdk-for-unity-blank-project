@@ -34,8 +34,8 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
 
             var rangeQuery =
-                InterestQuery.Query(Constraint.All(Constraint.RelativeSphere(10)));
-            var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(rangeQuery);
+                InterestQuery.Query(Constraint.All(Constraint.RelativeSphere(GameConstants.MaxFireDistance)));
+            var interestTemplate = InterestTemplate.Create().AddQueries<Metadata.Component>(rangeQuery);
             template.AddComponent(interestTemplate.ToSnapshot(), serverAttribute);
             
             template.AddComponent(turretRotationComponent, clientAttribute);
@@ -49,7 +49,7 @@ namespace BlankProject.Scripts.Config
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
-            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityTurretConnector.WorkerType);
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityHealerConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             return template;

@@ -7,7 +7,7 @@
       },
       {
         "name": "build",
-        "steps": [{"name": "** Open Unity to build the turret worker. **", "command": "echo", "arguments": ["No-op."]}]
+        "steps": [{"name": "** Open Unity to build the healer worker. **", "command": "echo", "arguments": ["No-op."]}]
       },
       {
         "name": "clean",
@@ -18,7 +18,7 @@
   "bridge": {
     "worker_attribute_set": {
       "attributes": [
-        "UnityTurret"
+        "UnityHealer"
       ]
     },
     "entity_interest": {
@@ -35,39 +35,39 @@
     "default": {
       "run_type": "EXECUTABLE",
       "windows": {
-        "command": "build/worker/UnityTurret@Windows/UnityTurret@Windows.exe",
+        "command": "build/worker/UnityHealer@Windows/UnityHealer@Windows.exe",
         "arguments": [
           "+workerType",
-          "UnityTurret",
+          "UnityHealer",
           "-batchmode",
           "-nographics",
           "-logfile",
-          "../../logs/external-default-unityturret.log"
+          "../../logs/external-default-UnityHealer.log"
         ]
       },
       "macos": {
         "command": "open",
         "arguments": [
           "-n",
-          "./build/worker/UnityTurret@Mac/UnityTurret@Mac.app",
+          "./build/worker/UnityHealer@Mac/UnityHealer@Mac.app",
           "--args",
           "+workerType",
-          "UnityTurret",
+          "UnityHealer",
           "-batchmode",
           "-nographics",
           "-logfile",
-          "../../logs/external-default-unityTurret.log"
+          "../../logs/external-default-UnityHealer.log"
         ]
       }
     }
   },
   "managed": {
     "windows": {
-      "artifact_name": "UnityTurret@Windows.zip",
-      "command": "UnityTurret@Windows.exe",
+      "artifact_name": "UnityHealer@Windows.zip",
+      "command": "UnityHealer@Windows.exe",
       "arguments": [
         "+workerType",
-        "UnityTurret",
+        "UnityHealer",
         "+workerId",
         "${IMPROBABLE_WORKER_ID}",
         "+receptionistHost",
@@ -83,11 +83,11 @@
       ]
     },
     "macos": {
-      "artifact_name": "UnityTurret@Mac.zip",
-      "command": "UnityTurret@Mac.app/Contents/MacOS/UnityTurret@Mac",
+      "artifact_name": "UnityHealer@Mac.zip",
+      "command": "UnityHealer@Mac.app/Contents/MacOS/UnityHealer@Mac",
       "arguments": [
         "+workerType",
-        "UnityTurret",
+        "UnityHealer",
         "+workerId",
         "${IMPROBABLE_WORKER_ID}",
         "+receptionistHost",
@@ -103,11 +103,11 @@
       ]
     },
     "linux": {
-      "artifact_name": "UnityTurret@Linux.zip",
-      "command": "UnityTurret@Linux",
+      "artifact_name": "UnityHealer@Linux.zip",
+      "command": "UnityHealer@Linux",
       "arguments": [
         "+workerType",
-        "UnityTurret",
+        "UnityHealer",
         "+workerId",
         "${IMPROBABLE_WORKER_ID}",
         "+receptionistHost",

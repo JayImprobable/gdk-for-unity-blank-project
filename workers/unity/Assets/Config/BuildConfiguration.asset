@@ -81,12 +81,12 @@ MonoBehaviour:
       - Options: 0
         Enabled: 0
         Required: 0
-  - WorkerType: UnityTurret
+  - WorkerType: UnityHealer
     ScenesForWorker:
     - {fileID: 102900000, guid: f53378f4a9002d64894574de4bcc16bc, type: 3}
     LocalBuildConfig:
       BuildTargets:
-      - Options: 1
+      - Options: 0
         Enabled: 1
         Required: 0
       - Options: 0

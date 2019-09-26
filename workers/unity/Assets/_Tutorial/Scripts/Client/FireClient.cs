@@ -53,11 +53,6 @@ public class FireClient : MonoBehaviour
             fireCannonball.SendFireEvent(new Empty());
             fireCannon = false;
             StartCoroutine(nameof(SetFireCannon));
-//            Debug.Break();
-            
-//            var entityTemplate = EntityTemplates.CreateCannonballEntityTemplate(linkedEntityComponent.Worker.WorkerId, cannonFiringPoint.transform.position, cannonFiringPoint.transform.eulerAngles);
-//            WorldCommands.CreateEntity.Request request = new WorldCommands.CreateEntity.Request(entityTemplate);
-//            worldCommandSender.SendCreateEntityCommand(request, CannonballEntityCreated);
         }
     }
 

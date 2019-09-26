@@ -7,7 +7,7 @@ using Tank;
 using Turret;
 using UnityEngine;
 
-public class TurretHeal : MonoBehaviour
+public class HealController : MonoBehaviour
 {
     [Require] private EntityId entityId;
     [Require] private HealthCommandSender healthCommandSender;

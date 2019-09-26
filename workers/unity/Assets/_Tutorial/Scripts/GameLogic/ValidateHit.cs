@@ -34,25 +34,17 @@ public class ValidateHit : MonoBehaviour
         damage = weaponsReader.Data.MachineGunDamage;
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        { 
-            Debug.Log($"123");
-        }
-    }
-
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)
     {
-//        entityIdHit = new EntityId(request.Payload.EntityIdHit);
-//        worldCommandSender.SendEntityQueryCommand(
-//            new WorldCommands.EntityQuery.Request(
-//                new EntityQuery
-//                {
-//                    Constraint = new EntityIdConstraint(request.Payload.EntityIdHit),
-//                    ResultType = new SnapshotResultType()
-//                }), QueryResultReceived);
-//        healthCommandReceiver.SendValidateHitResponse(request.RequestId, new Empty());
+        entityIdHit = new EntityId(request.Payload.EntityIdHit);
+        worldCommandSender.SendEntityQueryCommand(
+            new WorldCommands.EntityQuery.Request(
+                new EntityQuery
+                {
+                    Constraint = new EntityIdConstraint(request.Payload.EntityIdHit),
+                    ResultType = new SnapshotResultType()
+                }), QueryResultReceived);
+        healthCommandReceiver.SendValidateHitResponse(request.RequestId, new Empty());
     }
 
     void QueryResultReceived(WorldCommands.EntityQuery.ReceivedResponse response)

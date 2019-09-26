@@ -34,7 +34,7 @@ namespace BlankProject.Editor
         {
             var snapshot = new Snapshot();
 
-            AddTurret(snapshot);
+            AddHealer(snapshot);
             AddPlayerSpawner(snapshot);
             return snapshot;
         }
@@ -53,30 +53,30 @@ namespace BlankProject.Editor
                 UnityClientConnector.WorkerType,
                 UnityGameLogicConnector.WorkerType,
                 MobileClientWorkerConnector.WorkerType,
-                UnityTurretConnector.WorkerType);
+                UnityHealerConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             snapshot.AddEntity(template);
         }
 
-        private static void AddTurret(Snapshot snapshot)
+        private static void AddHealer(Snapshot snapshot)
         {
-            var turretAttribute = UnityTurretConnector.WorkerType;
+            var healerAttribute = UnityHealerConnector.WorkerType;
             
             var turretHeal = new Turret.TurretHeal.Snapshot(GameConstants.TurretHeal);
             
             var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), turretAttribute);
-            template.AddComponent(new Metadata.Snapshot("Turret"), turretAttribute);
-            template.AddComponent(new Persistence.Snapshot(), turretAttribute);
-            template.AddComponent(turretHeal, turretAttribute);
+            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
+            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
+            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
+            template.AddComponent(turretHeal, healerAttribute);
             
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,
                 UnityGameLogicConnector.WorkerType,
                 MobileClientWorkerConnector.WorkerType,
-                UnityTurretConnector.WorkerType);
-            template.SetComponentWriteAccess(EntityAcl.ComponentId, turretAttribute);
+                UnityHealerConnector.WorkerType);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
 
             snapshot.AddEntity(template);
         }
