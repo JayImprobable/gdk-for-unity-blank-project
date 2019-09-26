@@ -1,7 +1,0 @@
-package turret;
-
-component TurretHeal
-{
-    id = 20100;
-    int32 turret_heal = 1;
-}

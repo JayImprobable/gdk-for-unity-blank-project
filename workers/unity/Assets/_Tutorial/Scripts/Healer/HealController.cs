@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using Tank;
-using Turret;
+using Healer;
 using UnityEngine;
 
 public class HealController : MonoBehaviour
 {
     [Require] private EntityId entityId;
     [Require] private HealthCommandSender healthCommandSender;
-    [Require] private TurretHealReader turretHealReader;
+    [Require] private HealValueReader healValueReader;
 
     private Collider[] colliders;
     private float radius;
@@ -23,7 +23,7 @@ public class HealController : MonoBehaviour
     private void OnEnable()
     {
         radius = GetComponent<SphereCollider>().radius;
-        turretHeal = turretHealReader.Data.TurretHeal;
+        turretHeal = healValueReader.Data.Value;
         StartCoroutine(nameof(DealDamage));
     }
 

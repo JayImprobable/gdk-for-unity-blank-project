@@ -63,13 +63,12 @@ namespace BlankProject.Editor
         {
             var healerAttribute = UnityHealerConnector.WorkerType;
             
-            var turretHeal = new Turret.TurretHeal.Snapshot(GameConstants.TurretHeal);
-            
+            var healer = new Healer.HealValue.Snapshot(GameConstants.HealerValue);
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
             template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
             template.AddComponent(new Persistence.Snapshot(), healerAttribute);
-            template.AddComponent(turretHeal, healerAttribute);
+            template.AddComponent(healer, healerAttribute);
             
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,

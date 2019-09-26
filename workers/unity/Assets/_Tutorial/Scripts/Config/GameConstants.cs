@@ -9,5 +9,5 @@ public static class GameConstants
     public static int MachineGunDamage = -5;
     public static int CannonDamage = -25;
     public static int CannonForce = 750;
-    public static int TurretHeal = 3;
+    public static int HealerValue = 3;
 }
