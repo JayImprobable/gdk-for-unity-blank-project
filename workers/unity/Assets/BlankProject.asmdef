@@ -9,7 +9,8 @@
         "Unity.Entities.Hybrid",
         "Unity.Mathematics",
         "Improbable.Gdk.GameObjectCreation",
-        "Improbable.Gdk.TransformSynchronization"
+        "Improbable.Gdk.TransformSynchronization",
+        "Improbable.Gdk.QueryBasedInterestHelper"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

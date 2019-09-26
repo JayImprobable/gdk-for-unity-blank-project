@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
+using Improbable.Gdk.QueryBasedInterest;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Improbable.Worker.CInterop.Query;
@@ -19,6 +20,7 @@ public class ValidateHit : MonoBehaviour
     [Require] private WorldCommandSender worldCommandSender;
     [Require] private WeaponsReader weaponsReader;
     [Require] private WorkerFlagReader workerFlagReader;
+    [Require] private InterestReader interestReader;
 
     private int damage;
     private EntityId entityIdHit;
@@ -32,17 +34,25 @@ public class ValidateHit : MonoBehaviour
         damage = weaponsReader.Data.MachineGunDamage;
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        { 
+            Debug.Log($"123");
+        }
+    }
+
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)
     {
-        entityIdHit = new EntityId(request.Payload.EntityIdHit);
-        worldCommandSender.SendEntityQueryCommand(
-            new WorldCommands.EntityQuery.Request(
-                new EntityQuery
-                {
-                    Constraint = new EntityIdConstraint(request.Payload.EntityIdHit),
-                    ResultType = new SnapshotResultType()
-                }), QueryResultReceived);
-        healthCommandReceiver.SendValidateHitResponse(request.RequestId, new Empty());
+//        entityIdHit = new EntityId(request.Payload.EntityIdHit);
+//        worldCommandSender.SendEntityQueryCommand(
+//            new WorldCommands.EntityQuery.Request(
+//                new EntityQuery
+//                {
+//                    Constraint = new EntityIdConstraint(request.Payload.EntityIdHit),
+//                    ResultType = new SnapshotResultType()
+//                }), QueryResultReceived);
+//        healthCommandReceiver.SendValidateHitResponse(request.RequestId, new Empty());
     }
 
     void QueryResultReceived(WorldCommands.EntityQuery.ReceivedResponse response)

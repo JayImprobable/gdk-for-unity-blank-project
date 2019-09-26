@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.QueryBasedInterest;
 using Improbable.Gdk.TransformSynchronization;
 using Tank;
 using UnityEngine;
@@ -31,12 +32,19 @@ namespace BlankProject.Scripts.Config
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
+
+            var rangeQuery =
+                InterestQuery.Query(Constraint.All(Constraint.RelativeSphere(10)));
+            var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(rangeQuery);
+            template.AddComponent(interestTemplate.ToSnapshot(), serverAttribute);
+            
             template.AddComponent(turretRotationComponent, clientAttribute);
             template.AddComponent(colorComponent, clientAttribute);
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
             template.AddComponent(weaponsFxComponent, clientAttribute);
             template.AddComponent(fireCannon, clientAttribute);
+
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);

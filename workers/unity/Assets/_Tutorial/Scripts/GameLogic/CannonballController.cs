@@ -20,7 +20,6 @@ public class CannonballController : MonoBehaviour
             foreach (var v in hitColliders)
             {
                 {
-                    Debug.Log($"I am {gameObject.name}");
                     if (v.gameObject.TryGetComponent<UpdateHealth>(out var updateHealth))
                     {
                         if (updateHealth.enabled)
