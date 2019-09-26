@@ -2,7 +2,6 @@ using System.IO;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
-using Improbable.Gdk.TransformSynchronization;
 using UnityEditor;
 using UnityEngine;
 using Snapshot = Improbable.Gdk.Core.Snapshot;

@@ -15,6 +15,13 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
     private readonly string workerType;
     private readonly Vector3 workerOrigin;
     private readonly ILogDispatcher logger;
+    
+    private readonly Type[] componentsToAdd =
+    {
+        typeof(Transform),
+        typeof(Rigidbody),
+        typeof(MeshRenderer)
+    };
 
     public CustomGameObjectCreator(IEntityGameObjectCreator fallbackCreator, World world, string workerType, Vector3 workerOrigin, ILogDispatcher logger)
     {
@@ -37,18 +44,45 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
             case "Player":
                 CreatePlayer(entity, linker);
                 break;
+            
+            case "Healer":
+                CreateHealer(entity, linker);
+                break;
 
             default:
                 fallbackCreator.OnEntityCreated(entity, linker);
                 break;
         }
     }
-    
-    public void OnEntityRemoved(EntityId entityId)
-    {
-        fallbackCreator.OnEntityRemoved(entityId);
-    }
 
+    private void CreateHealer(SpatialOSEntity entity, EntityGameObjectLinker linker)
+    {
+        if (!entity.TryGetComponent<Metadata.Component>(out var metadata) ||
+            !entity.TryGetComponent<Position.Component>(out var spatialOSPosition))
+        {
+            return;
+        }
+
+        var prefabName = metadata.EntityType;
+        var position = spatialOSPosition.Coords.ToUnityVector() + workerOrigin;
+
+        var pathToPrefab = $"Prefabs/{workerType}/Healer";
+        
+        var prefab = Resources.Load<GameObject>(pathToPrefab);
+
+        var rotation = prefab.GetComponent<Transform>().rotation;
+
+        if (prefab == null)
+        {
+            return;
+        }
+
+        var gameObject = Object.Instantiate(prefab, position, rotation);
+        gameObject.name = $"{prefab.name}(SpatialOS: {entity.SpatialOSEntityId}, Worker: {workerType})";
+
+        linker.LinkGameObjectToSpatialOSEntity(entity.SpatialOSEntityId, gameObject);
+    }
+    
     private void CreatePlayer(SpatialOSEntity entity, EntityGameObjectLinker linker)
     {
         if (!entity.TryGetComponent<Metadata.Component>(out var metadata) ||
@@ -74,13 +108,15 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         var playerGameObject = Object.Instantiate(prefab, position, Quaternion.identity);
         playerGameObject.name = $"{metadata.EntityType}(SpatialOS: {entity.SpatialOSEntityId}, Worker: {workerType})";
 
-        Type[] componentsToAdd =
-        {
-            typeof(Transform),
-            typeof(Rigidbody),
-            typeof(MeshRenderer)
-        };
         linker.LinkGameObjectToSpatialOSEntity(entity.SpatialOSEntityId, (GameObject) playerGameObject,
             componentsToAdd);
     }
+    
+    
+
+    public void OnEntityRemoved(EntityId entityId)
+    {
+        fallbackCreator.OnEntityRemoved(entityId);
+    }
+
 }
