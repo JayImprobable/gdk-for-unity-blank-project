@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6778e7cf5f665a4faa8aaa7030770cd, type: 3}
   m_Name: TurretReceiveStrategy
   m_EditorClassIdentifier: 
-  WorkerType: UnityTurret
+  WorkerType: UnityHealer

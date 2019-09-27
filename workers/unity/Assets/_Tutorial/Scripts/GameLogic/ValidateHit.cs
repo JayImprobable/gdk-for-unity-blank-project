@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Improbable;
+﻿using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
-using Improbable.Gdk.QueryBasedInterest;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Improbable.Worker.CInterop.Query;
 using Tank;
-using Unity.Entities;
 using UnityEngine;
 using EntityQuery = Improbable.Worker.CInterop.Query.EntityQuery;
 
@@ -20,7 +15,6 @@ public class ValidateHit : MonoBehaviour
     [Require] private WorldCommandSender worldCommandSender;
     [Require] private WeaponsReader weaponsReader;
     [Require] private WorkerFlagReader workerFlagReader;
-    [Require] private InterestReader interestReader;
 
     private int damage;
     private EntityId entityIdHit;
@@ -54,16 +48,19 @@ public class ValidateHit : MonoBehaviour
             if (response.Result.Count > 0)
             {
                 var v = response.Result[entityIdHit].GetComponentSnapshot<Position.Snapshot>();
-                Vector3 hitPosition = v.Value.Coords.ToUnityVector();
-                Vector3 myPosition = transform.position - workerOrigin;
-                if (Vector3.Distance(hitPosition, myPosition) <= GameConstants.MaxFireDistance)
+                if (v != null)
                 {
-                    HealthModifier request = new HealthModifier(damage);
-                    healthCommandSender.SendUpdateHealthCommand(entityIdHit, request, UpdateHealthCommandCallback);
-                }
-                else
-                {
-                    //Cheat
+                    Vector3 hitPosition = v.Value.Coords.ToUnityVector();
+                    Vector3 myPosition = transform.position - workerOrigin;
+                    if (Vector3.Distance(hitPosition, myPosition) <= GameConstants.MaxFireDistance)
+                    {
+                        HealthModifier request = new HealthModifier(damage);
+                        healthCommandSender.SendUpdateHealthCommand(entityIdHit, request, UpdateHealthCommandCallback);
+                    }
+                    else
+                    {
+                        //Cheat
+                    }
                 }
             }
         }

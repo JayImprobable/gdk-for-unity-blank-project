@@ -1,7 +1,7 @@
 {
   "template": "w2_r0500_e5",
   "world": {
-    "chunkEdgeLengthMeters": 100,
+    "chunkEdgeLengthMeters": 25,
     "snapshots": {
       "snapshotWritePeriodSeconds": 0
     },

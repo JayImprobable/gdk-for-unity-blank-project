@@ -39,11 +39,6 @@ public class UpdateHealth : MonoBehaviour
         var updatedHealth = healthWriter.Data.Health + value;
 
         SendHealthUpdate(updatedHealth);
-        
-        if (updatedHealth <= 0)
-        {
-            worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(entityId));
-        }
     }
 
     private void SendHealthUpdate(int value)

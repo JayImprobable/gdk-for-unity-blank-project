@@ -276,7 +276,7 @@ Transform:
   - {fileID: 4941401846200096538}
   - {fileID: 444697161023032437}
   - {fileID: 8310352085536690625}
-  - {fileID: 7225320840547002842}
+  - {fileID: 1944523928737219283}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -378,9 +378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa8129101e31034082e69e8b840739e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  machineGunFx: {fileID: 7687407845985886531}
-  damageFx: {fileID: 9131375005683250529, guid: b49e7cdb55d8ab64991d8ff6be3bdf42,
-    type: 3}
+  machineGunFx: {fileID: 5518317608012442912}
+  damageFx: {fileID: 1944523928737586931}
   healFx: {fileID: 1461618951511722178}
 --- !u!114 &4400245065233437998
 MonoBehaviour:
@@ -458,7 +457,7 @@ Transform:
   m_LocalPosition: {x: 0.000010554959, y: 1.0796412, z: -0.025321364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7687407845985887145}
+  - {fileID: 5518317608012280064}
   m_Father: {fileID: 4941401846200096538}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -821,7 +820,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b49e7cdb55d8ab64991d8ff6be3bdf42, type: 3}
---- !u!4 &7225320840547002842 stripped
+--- !u!1 &1944523928737586931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9131375005683250529, guid: b49e7cdb55d8ab64991d8ff6be3bdf42,
+    type: 3}
+  m_PrefabInstance: {fileID: 7225320840547003282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1944523928737219283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9131375005683607873, guid: b49e7cdb55d8ab64991d8ff6be3bdf42,
     type: 3}
@@ -896,13 +901,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99755cf7b540f0442b6670e0beb3bb5e, type: 3}
---- !u!1 &7687407845985886531 stripped
+--- !u!1 &5518317608012442912 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2754558189542788253, guid: 99755cf7b540f0442b6670e0beb3bb5e,
     type: 3}
   m_PrefabInstance: {fileID: 7687407845985886653}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7687407845985887145 stripped
+--- !u!4 &5518317608012280064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2754558189542363325, guid: 99755cf7b540f0442b6670e0beb3bb5e,
     type: 3}

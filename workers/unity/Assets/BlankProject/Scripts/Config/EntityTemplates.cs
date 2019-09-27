@@ -33,11 +33,6 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
 
-            var rangeQuery =
-                InterestQuery.Query(Constraint.All(Constraint.RelativeSphere(GameConstants.MaxFireDistance)));
-            var interestTemplate = InterestTemplate.Create().AddQueries<Metadata.Component>(rangeQuery);
-            template.AddComponent(interestTemplate.ToSnapshot(), serverAttribute);
-            
             template.AddComponent(turretRotationComponent, clientAttribute);
             template.AddComponent(colorComponent, clientAttribute);
             template.AddComponent(healthComponent, serverAttribute);

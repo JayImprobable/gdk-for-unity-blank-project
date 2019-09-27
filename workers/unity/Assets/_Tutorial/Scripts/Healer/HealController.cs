@@ -12,24 +12,26 @@ public class HealController : MonoBehaviour
     [Require] private EntityId entityId;
     [Require] private HealthCommandSender healthCommandSender;
     [Require] private HealValueReader healValueReader;
+    [Require] private ILogDispatcher logger;
 
     private Collider[] colliders;
     private float radius;
     private int turretHeal;
 
     [SerializeField] private LayerMask mask;
-    [SerializeField] private float fireRate = 1;
+    [SerializeField] private float healRate = 1;
 
     private void OnEnable()
     {
         radius = GetComponent<SphereCollider>().radius;
         turretHeal = healValueReader.Data.Value;
         StartCoroutine(nameof(DealDamage));
+        LinkedEntityComponent lec = gameObject.GetComponent<LinkedEntityComponent>();
     }
 
     public IEnumerator DealDamage()
     {
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(healRate);
         colliders = Physics.OverlapSphere(transform.position, radius, mask);
         if (colliders.Length > 0)
         {

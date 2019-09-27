@@ -27,6 +27,7 @@ public class HealthBarValueController : MonoBehaviour
         if (update.Health.Value <= 0)
         {
             gameObject.SetActive(false);
+            return;
         }
         float fillAmount = (float)update.Health.Value / 100;
         if (fillAmount > foregroundImage.fillAmount)

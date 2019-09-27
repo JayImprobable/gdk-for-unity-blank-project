@@ -77,4 +77,4 @@ MonoBehaviour:
   ReceiveStrategies:
   - {fileID: 11400000, guid: 51220a6a850c76c47b77322a11cce36e, type: 2}
   SendStrategies: []
-  SetKinematicWhenNotAuthoritative: 1
+  SetKinematicWhenNotAuthoritative: 0
