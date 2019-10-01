@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssemblyConfig:
     ProjectName: beta_bluebird_beryllium_604
-    AssemblyName: 20190927_5
+    AssemblyName: 20191001_0
     ShouldForceUpload: 1
   DeploymentConfigs:
   - ProjectName: beta_bluebird_beryllium_604
-    AssemblyName: 20190927_5
+    AssemblyName: 20191001_0
     Deployment:
-      Name: 20190927_deployment
+      Name: 20191001_deployment
       SnapshotPath: snapshots/default.snapshot
       LaunchJson: cloud_launch.json
       Region: 1

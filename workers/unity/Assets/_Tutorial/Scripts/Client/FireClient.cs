@@ -22,9 +22,11 @@ public class FireClient : MonoBehaviour
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private float cannonFireDelay = 1f;
     [SerializeField] private GameObject cannonballGameObject;
+    [SerializeField] private bool cheat;
 
     private LinkedEntityComponent linkedEntityComponent;
     private bool fireCannon;
+    private float fireDistance;
 
     private void OnEnable()
     {
@@ -34,9 +36,21 @@ public class FireClient : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            cheat = !cheat;
+        }
         if (Input.GetMouseButtonDown(0)) //Machine Gun
         {
-            if (Physics.Raycast(firingPoint.transform.position, firingPoint.transform.forward, out var hit, GameConstants.MaxFireDistance, hitMask))
+            if (cheat)
+            {
+                fireDistance = 200f;
+            }
+            else
+            {
+                fireDistance = GameConstants.MaxFireDistance;
+            }
+            if (Physics.Raycast(firingPoint.transform.position, firingPoint.transform.forward, out var hit, fireDistance, hitMask))
             {
                 HitValidator request = new HitValidator(hit.collider.gameObject.GetComponent<LinkedEntityComponent>().EntityId.Id);
                 healthCommandSender.SendValidateHitCommand(entityId, request, OnCommandSent);
