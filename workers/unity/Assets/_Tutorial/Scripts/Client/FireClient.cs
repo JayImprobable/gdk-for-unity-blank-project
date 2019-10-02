@@ -23,6 +23,7 @@ public class FireClient : MonoBehaviour
     [SerializeField] private float cannonFireDelay = 1f;
     [SerializeField] private GameObject cannonballGameObject;
     [SerializeField] private bool cheat;
+    [SerializeField] private GameObject cheatModeText;
 
     private LinkedEntityComponent linkedEntityComponent;
     private bool fireCannon;
@@ -32,6 +33,7 @@ public class FireClient : MonoBehaviour
     {
         linkedEntityComponent = gameObject.GetComponent<LinkedEntityComponent>();
         fireCannon = true;
+        cheatModeText.SetActive(false);
     }
 
     private void Update()
@@ -39,6 +41,7 @@ public class FireClient : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             cheat = !cheat;
+            cheatModeText.SetActive(!cheatModeText.activeSelf);
         }
         if (Input.GetMouseButtonDown(0)) //Machine Gun
         {
