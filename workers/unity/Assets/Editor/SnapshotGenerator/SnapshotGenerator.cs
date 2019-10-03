@@ -1,4 +1,5 @@
 using System.IO;
+using BlankProject.Scripts.Config;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
@@ -60,23 +61,7 @@ namespace BlankProject.Editor
 
         private static void AddHealer(Snapshot snapshot)
         {
-            var healerAttribute = UnityHealerConnector.WorkerType;
-            
-            var healer = new Healer.HealValue.Snapshot(GameConstants.HealerValue);
-            var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
-            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
-            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
-            template.AddComponent(healer, healerAttribute);
-            
-            template.SetReadAccess(
-                UnityClientConnector.WorkerType,
-                UnityGameLogicConnector.WorkerType,
-                MobileClientWorkerConnector.WorkerType,
-                UnityHealerConnector.WorkerType);
-            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
-
-            snapshot.AddEntity(template);
+            snapshot.AddEntity(EntityTemplates.CreateHealerTemplate());
         }
     }
 }
