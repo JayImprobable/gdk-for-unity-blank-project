@@ -10,23 +10,17 @@ using EntityQuery = Improbable.Worker.CInterop.Query.EntityQuery;
 
 public class ValidateHit : MonoBehaviour
 {
+    
     [Require] private HealthCommandReceiver healthCommandReceiver;
-    [Require] private HealthCommandSender healthCommandSender;
     [Require] private WorldCommandSender worldCommandSender;
     [Require] private WeaponsReader weaponsReader;
     [Require] private EntityId entityId;
 
-    private int damage;
     private EntityId entityIdHit;
-    private Vector3 workerOrigin;
-    private ILogDispatcher logger;
 
     private void OnEnable()
     {
         healthCommandReceiver.OnValidateHitRequestReceived += OnValidateHit;
-        workerOrigin = GetComponent<LinkedEntityComponent>().Worker.Origin;
-        logger = GetComponent<LinkedEntityComponent>().Worker.LogDispatcher;
-        damage = weaponsReader.Data.MachineGunDamage;
     }
 
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)
@@ -54,14 +48,6 @@ public class ValidateHit : MonoBehaviour
                     Debug.Log($"Hit!!!");
                 }
             }
-        }
-    }
-
-    private void UpdateHealthCommandCallback(Tank.Health.UpdateHealth.ReceivedResponse response)
-    {
-        if (response.StatusCode != StatusCode.Success)
-        {
-            Debug.LogWarning($"Update Health request response = {response.Message}");
         }
     }
 }
