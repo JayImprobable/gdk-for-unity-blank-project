@@ -1,5 +1,4 @@
 using System.IO;
-using BlankProject.Scripts.Config;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
@@ -34,7 +33,6 @@ namespace BlankProject.Editor
         {
             var snapshot = new Snapshot();
 
-            AddHealer(snapshot);
             AddPlayerSpawner(snapshot);
             return snapshot;
         }
@@ -52,16 +50,10 @@ namespace BlankProject.Editor
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,
                 UnityGameLogicConnector.WorkerType,
-                MobileClientWorkerConnector.WorkerType,
-                UnityHealerConnector.WorkerType);
+                MobileClientWorkerConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             snapshot.AddEntity(template);
-        }
-
-        private static void AddHealer(Snapshot snapshot)
-        {
-            snapshot.AddEntity(EntityTemplates.CreateHealerTemplate());
         }
     }
 }

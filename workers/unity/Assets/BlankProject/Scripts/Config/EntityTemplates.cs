@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
-using Improbable.Gdk.QueryBasedInterest;
+//#10 - Adding the Transform Synchronization systems to the worker
 using Improbable.Gdk.TransformSynchronization;
+//#13 - Adding the TurretRotation component to the Player Template
 using Tank;
-using UnityEngine;
 
 namespace BlankProject.Scripts.Config
 {
@@ -18,55 +19,41 @@ namespace BlankProject.Scripts.Config
             spawnPoints.Add(new Vector3(-37, 0, -35));
             spawnPoints.Add(new Vector3(39, 0, 33));
             spawnPoints.Add(new Vector3(23, 0, -35));
+            
             var clientAttribute = EntityTemplate.GetWorkerAccessAttribute(workerId);
             var serverAttribute = UnityGameLogicConnector.WorkerType;
-            Vector3 position = spawnPoints[Random.Range(0, 3)];
-
+            Vector3 position = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            
+            //#13 - Adding the TurretRotation component to the Player Template
             var turretRotationComponent = new TurretRotation.Snapshot();
+            
+            //#15 - Adding the TankColor component to the Player Template
             var colorComponent = new TankColor.Snapshot();
+            
+            //#16 - Adding the Health and Weapons component
             var healthComponent = new Health.Snapshot(GameConstants.MaxHealth);
-            var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage, GameConstants.CannonDamage);
-            var weaponsFxComponent = new WeaponsFx.Snapshot();
-            var fireCannon = new FireCannonball.Snapshot();
+            var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage);
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
-
+            
+            //#13 - Adding the TurretRotation component to the Player Template
             template.AddComponent(turretRotationComponent, clientAttribute);
+            
+            //#15 - Adding the TankColor component to the Player Template
             template.AddComponent(colorComponent, clientAttribute);
+            
+            //#16 - Adding the Health and Weapons component
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
-            template.AddComponent(weaponsFxComponent, clientAttribute);
-            template.AddComponent(fireCannon, clientAttribute);
-
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
+            //#10 - Adding the Transform Synchronization systems to the worker
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
-            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityHealerConnector.WorkerType);
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
-
-            return template;
-        }
-
-        public static EntityTemplate CreateHealerTemplate()
-        {
-            var healerAttribute = UnityHealerConnector.WorkerType;
-            
-            var healer = new Healer.HealValue.Snapshot(GameConstants.HealerValue);
-            var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
-            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
-            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
-            template.AddComponent(healer, healerAttribute);
-            
-            template.SetReadAccess(
-                UnityClientConnector.WorkerType,
-                UnityGameLogicConnector.WorkerType,
-                MobileClientWorkerConnector.WorkerType,
-                UnityHealerConnector.WorkerType);
-            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
 
             return template;
         }

@@ -17,7 +17,6 @@
     "io.improbable.gdk.gameobjectcreation": "0.2.9",
     "io.improbable.gdk.mobile": "0.2.9",
     "io.improbable.gdk.playerlifecycle": "0.2.9",
-    "io.improbable.gdk.querybasedinteresthelper": "0.2.9",
     "io.improbable.gdk.testutils": "0.2.9",
     "io.improbable.gdk.tools": "0.2.9",
     "io.improbable.gdk.transformsynchronization": "0.2.9",
