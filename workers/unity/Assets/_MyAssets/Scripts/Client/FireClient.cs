@@ -11,6 +11,8 @@ public class FireClient : MonoBehaviour
     [Require] private EntityId entityId;
     //#17 - HealthCommandSender is used to send the Command
     [Require] private HealthCommandSender healthCommandSender;
+    //#21 - Adding a WeaponsFxWriter in order to send the effect Event
+    [Require] private WeaponsFxWriter weaponsFxWriter;
 
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private LayerMask hitMask;
@@ -30,6 +32,8 @@ public class FireClient : MonoBehaviour
                 //#17 - Sending the Command
                 healthCommandSender.SendValidateHitCommand(entityId, request, OnCommandResponse);
             }
+            //#21 - Sending the event, passing the MACHINE_GUN enum as parameter
+            weaponsFxWriter.SendShowEffectEvent(new Effect(EffectEnum.MACHINE_GUN));
         }
     }
 

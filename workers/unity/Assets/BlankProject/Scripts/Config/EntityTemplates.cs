@@ -33,6 +33,9 @@ namespace BlankProject.Scripts.Config
             //#16 - Adding the Health and Weapons component
             var healthComponent = new Health.Snapshot(GameConstants.MaxHealth);
             var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage);
+            
+            //#21 - Adding the weapons effect components
+            var weaponsFxComponent = new WeaponsFx.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
@@ -47,6 +50,9 @@ namespace BlankProject.Scripts.Config
             //#16 - Adding the Health and Weapons component
             template.AddComponent(healthComponent, serverAttribute);
             template.AddComponent(weaponsComponent, serverAttribute);
+            
+            //#21 - Adding the weapons effect components
+            template.AddComponent(weaponsFxComponent, clientAttribute);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             //#10 - Adding the Transform Synchronization systems to the worker

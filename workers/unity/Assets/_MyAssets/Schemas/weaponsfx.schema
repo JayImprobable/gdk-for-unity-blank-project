@@ -1,0 +1,17 @@
+package tank;
+
+enum Effect 
+{
+    MACHINE_GUN = 0;
+    DAMAGE = 1;
+    HEAL = 2;
+}
+
+component WeaponsFx
+{
+    id = 20005;
+
+    event Effect machine_gun_effect;
+    event Effect damage_effect;
+    event Effect heal_effect;
+}

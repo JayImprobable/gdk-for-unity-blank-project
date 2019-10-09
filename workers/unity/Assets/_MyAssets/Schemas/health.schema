@@ -1,0 +1,22 @@
+package tank;
+
+import "improbable/gdk/core/common.schema";
+
+type HitValidator
+{
+    int64 entity_id_hit = 1;
+}
+
+type HealthModifier
+{
+    int32 amount = 1;
+}
+
+component Health
+{
+    id = 20003;
+    int32 health = 1;
+
+    command improbable.gdk.core.Empty validate_hit(HitValidator);
+    command improbable.gdk.core.Empty update_health(HealthModifier);
+}
