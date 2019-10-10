@@ -1,0 +1,7 @@
+package healer;
+
+component HealValue
+{
+    id = 20100;
+    int32 value = 1;
+}

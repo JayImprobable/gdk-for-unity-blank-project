@@ -1,0 +1,126 @@
+{
+  "build": {
+    "tasks": [
+      {
+        "name": "Codegen",
+        "steps": [{"name": "** Load Unity to generate code **", "command": "echo", "arguments": ["No-op."]}]
+      },
+      {
+        "name": "build",
+        "steps": [{"name": "** Open Unity to build the healer worker. **", "command": "echo", "arguments": ["No-op."]}]
+      },
+      {
+        "name": "clean",
+        "steps": [{"name": "No-op", "command": "echo", "arguments": ["No-op."]}]
+      }
+    ]
+  },
+  "bridge": {
+    "worker_attribute_set": {
+      "attributes": [
+        "UnityHealer"
+      ]
+    },
+    "entity_interest": {
+      "range_entity_interest": {
+        "radius": 100
+      }
+    },
+    "component_delivery": {
+      "default": "RELIABLE_ORDERED",
+      "checkoutAllInitially": true
+    }
+  },
+  "external": {
+    "default": {
+      "run_type": "EXECUTABLE",
+      "windows": {
+        "command": "build/worker/UnityHealer@Windows/UnityHealer@Windows.exe",
+        "arguments": [
+          "+workerType",
+          "UnityHealer",
+          "-batchmode",
+          "-nographics",
+          "-logfile",
+          "../../logs/external-default-UnityHealer.log"
+        ]
+      },
+      "macos": {
+        "command": "open",
+        "arguments": [
+          "-n",
+          "./build/worker/UnityHealer@Mac/UnityHealer@Mac.app",
+          "--args",
+          "+workerType",
+          "UnityHealer",
+          "-batchmode",
+          "-nographics",
+          "-logfile",
+          "../../logs/external-default-UnityHealer.log"
+        ]
+      }
+    }
+  },
+  "managed": {
+    "windows": {
+      "artifact_name": "UnityHealer@Windows.zip",
+      "command": "UnityHealer@Windows.exe",
+      "arguments": [
+        "+workerType",
+        "UnityHealer",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    },
+    "macos": {
+      "artifact_name": "UnityHealer@Mac.zip",
+      "command": "UnityHealer@Mac.app/Contents/MacOS/UnityHealer@Mac",
+      "arguments": [
+        "+workerType",
+        "UnityHealer",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    },
+    "linux": {
+      "artifact_name": "UnityHealer@Linux.zip",
+      "command": "UnityHealer@Linux",
+      "arguments": [
+        "+workerType",
+        "UnityHealer",
+        "+workerId",
+        "${IMPROBABLE_WORKER_ID}",
+        "+receptionistHost",
+        "${IMPROBABLE_RECEPTIONIST_HOST}",
+        "+receptionistPort",
+        "${IMPROBABLE_RECEPTIONIST_PORT}",
+        "+linkProtocol",
+        "Tcp",
+        "-batchmode",
+        "-nographics",
+        "-logfile",
+        "${IMPROBABLE_LOG_FILE}"
+      ]
+    }
+  }
+}

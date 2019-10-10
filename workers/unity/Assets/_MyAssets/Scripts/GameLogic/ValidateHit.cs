@@ -17,12 +17,16 @@ public class ValidateHit : MonoBehaviour
     [Require] private WorldCommandSender worldCommandSender;
     [Require] private WeaponsReader weaponsReader;
     [Require] private EntityId entityId;
+    //#24 - WorkerFlagReader will allow a callback to be called when a flag is changed
+    [Require] private WorkerFlagReader workerFlagReader;
 
     private EntityId entityIdHit;
     //#19 - Worker origin offset
     private Vector3 workerOrigin;
     //#19 - Damage inflicted
     private int damage;
+    //#30 - Class that send logs to the Console
+    private ILogDispatcher logger;
 
     private void OnEnable()
     {
@@ -30,6 +34,10 @@ public class ValidateHit : MonoBehaviour
         workerOrigin = GetComponent<LinkedEntityComponent>().Worker.Origin;
         //#19 - Read the machine gun damage value from the Weapon Component
         damage = weaponsReader.Data.MachineGunDamage;
+        //#24 - setting the callback to be called when a flag is changed
+        workerFlagReader.OnWorkerFlagChange += UpdateDamageValue;
+        //#30 - Setting the variable to the LogDispatcher contained within the Worker
+        logger = GetComponent<LinkedEntityComponent>().Worker.LogDispatcher;
     }
 
     private void OnValidateHit(Health.ValidateHit.ReceivedRequest request)
@@ -69,6 +77,9 @@ public class ValidateHit : MonoBehaviour
                     else
                     {
                         //Player is cheating!
+                        //#30 - Send the Log to the console (and to the Unity Editor if playing within the Editor)
+                        logger.HandleLog(LogType.Warning, new LogEvent($"Potential cheat: {entityId.Id} - Reason: Hitting from too far " +
+                                                                       $"(max distance {GameConstants.MaxFireDistance} - current distance {distance})"));
                     }
                 }
             }
@@ -82,5 +93,11 @@ public class ValidateHit : MonoBehaviour
         {
             Debug.LogWarning($"Update Health request response = {response.Message}");
         }
+    }
+    
+    //#24 - Callback when a flag is changed. It receives a key value pair containing the flag name and the new value
+    private void UpdateDamageValue(string value, string key)
+    {
+        damage = int.Parse(key) * -1;
     }
 }

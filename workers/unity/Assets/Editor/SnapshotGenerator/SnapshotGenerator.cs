@@ -34,6 +34,8 @@ namespace BlankProject.Editor
             var snapshot = new Snapshot();
 
             AddPlayerSpawner(snapshot);
+            //#27 - Adding the Healer Entity to the Snapshot
+            AddHealer(snapshot);
             return snapshot;
         }
 
@@ -52,6 +54,29 @@ namespace BlankProject.Editor
                 UnityGameLogicConnector.WorkerType,
                 MobileClientWorkerConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
+
+            snapshot.AddEntity(template);
+        }
+        
+        //#27 - AddHealer method
+        private static void AddHealer(Snapshot snapshot)
+        {
+            
+            var healerAttribute = UnityHealerConnector.WorkerType;
+            
+            var healer = new Healer.HealValue.Snapshot(GameConstants.HealerValue);
+            var template = new EntityTemplate();
+            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
+            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
+            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
+            template.AddComponent(healer, healerAttribute);
+            
+            template.SetReadAccess(
+                UnityClientConnector.WorkerType,
+                UnityGameLogicConnector.WorkerType,
+                MobileClientWorkerConnector.WorkerType,
+                UnityHealerConnector.WorkerType);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
 
             snapshot.AddEntity(template);
         }

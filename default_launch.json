@@ -1,13 +1,13 @@
 {
   "template": "w2_r0500_e5",
   "world": {
-    "chunkEdgeLengthMeters": 50,
+    "chunkEdgeLengthMeters": 25,
     "snapshots": {
       "snapshotWritePeriodSeconds": 0
     },
     "dimensions": {
-      "xMeters": 5000,
-      "zMeters": 5000
+      "xMeters": 100,
+      "zMeters": 100
     }
   },
   "load_balancing": {
@@ -15,6 +15,16 @@
       {
         "layer": "UnityGameLogic",
         "rectangle_grid": {
+          "cols": 2,
+          "rows": 1
+        },
+        "options": {
+          "manual_worker_connection_only": true
+        }
+      },
+      {
+        "layer": "UnityHealer",
+        "rectangle_grid":{
           "cols": 1,
           "rows": 1
         },
@@ -43,6 +53,14 @@
     },
     {
       "worker_type": "MobileClient",
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
+    },
+    {
+      "worker_type": "UnityHealer",
       "permissions": [
         {
           "all": {}

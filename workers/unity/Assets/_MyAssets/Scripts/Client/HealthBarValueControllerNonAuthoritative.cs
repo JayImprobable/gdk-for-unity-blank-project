@@ -26,6 +26,7 @@ public class HealthBarValueControllerNonAuthoritative : MonoBehaviour
             gameObject.SetActive(false);
         }
         float fillAmount = (float)update.Health.Value / 100;
+        
         foregroundImage.fillAmount = fillAmount;
     }
 }

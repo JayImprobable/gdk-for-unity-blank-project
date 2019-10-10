@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MobileClientScene.unity
     guid: 17bd667c9bc89cf4b8c402299c7aa813
+  - enabled: 1
+    path: Assets/Scenes/HealerScene.unity
+    guid: bc07a43783a7e864db7729813dbfb3a2
   m_configObjects: {}

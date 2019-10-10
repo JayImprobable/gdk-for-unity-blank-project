@@ -36,6 +36,9 @@ namespace BlankProject.Scripts.Config
             
             //#21 - Adding the weapons effect components
             var weaponsFxComponent = new WeaponsFx.Snapshot();
+            
+            //#22 - Adding the fire cannonball component
+            var fireCannonball = new FireCannonball.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
@@ -53,12 +56,15 @@ namespace BlankProject.Scripts.Config
             
             //#21 - Adding the weapons effect components
             template.AddComponent(weaponsFxComponent, clientAttribute);
+            
+            //#22 - Adding the fire cannonball component
+            template.AddComponent(fireCannonball, clientAttribute);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
             //#10 - Adding the Transform Synchronization systems to the worker
             TransformSynchronizationHelper.AddTransformSynchronizationComponents(template, clientAttribute, position);
 
-            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute);
+            template.SetReadAccess(UnityClientConnector.WorkerType, MobileClientWorkerConnector.WorkerType, serverAttribute, UnityHealerConnector.WorkerType);
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             return template;

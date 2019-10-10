@@ -31,12 +31,13 @@ public class UpdateHealth : MonoBehaviour
         healthCommandReceiver.SendUpdateHealthResponse(request.RequestId, new Empty());
     }
 
-//    public void TakeCannonballDamage(int value)
-//    {
-//        var updatedHealth = healthWriter.Data.Health + value;
-//
-//        SendHealthUpdate(updatedHealth);
-//    }
+    //#23 - Update the health when taking damage from a cannonball
+    public void TakeCannonballDamage(int value)
+    {
+        var updatedHealth = healthWriter.Data.Health + value;
+
+        SendHealthUpdate(updatedHealth);
+    }
 
     private void SendHealthUpdate(int value)
     {
