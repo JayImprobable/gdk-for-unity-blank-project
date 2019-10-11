@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6051860669121389768}
   - component: {fileID: 6051860669122356744}
   - component: {fileID: 6051860669126777744}
-  - component: {fileID: 4922638833207535882}
+  - component: {fileID: 3061192089542467195}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: HealerClient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14128536, y: 0.024288885, z: 0.095516756}
   m_Center: {x: 0, y: 0.012144275, z: -0.000000040978193}
---- !u!114 &4922638833207535882
+--- !u!114 &3061192089542467195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5694945dbf2a10d4b82d86e205897a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: 1
+  rotation: 0.5
