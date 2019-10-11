@@ -52,7 +52,7 @@ namespace BlankProject
         protected override void HandleWorkerConnectionEstablished()
         {
 //            //#4 - Adding the Player Lifecycle system to the worker
-//            PlayerLifecycleHelper.AddClientSystems(Worker.World);
+            PlayerLifecycleHelper.AddClientSystems(Worker.World);
             
             //#6 - Adding the systems to the worker
             //GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);

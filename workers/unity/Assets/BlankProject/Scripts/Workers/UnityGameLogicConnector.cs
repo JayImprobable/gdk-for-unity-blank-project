@@ -21,7 +21,7 @@ namespace BlankProject
         private async void Start()
         {
 //            //#4 - Setting the player entity template
-//            PlayerLifecycleConfig.CreatePlayerEntityTemplate = EntityTemplates.CreatePlayerEntityTemplate;
+            PlayerLifecycleConfig.CreatePlayerEntityTemplate = EntityTemplates.CreatePlayerEntityTemplate;
 
             IConnectionFlow flow;
             ConnectionParameters connectionParameters;
@@ -51,7 +51,7 @@ namespace BlankProject
             Worker.World.GetOrCreateSystem<MetricSendSystem>();
             
 //            //#4 - Adding the Player Lifecycle system to the worker
-//            PlayerLifecycleHelper.AddServerSystems(Worker.World);
+            PlayerLifecycleHelper.AddServerSystems(Worker.World);
             
 //            //#6 - Adding the systems to the worker
 //            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
