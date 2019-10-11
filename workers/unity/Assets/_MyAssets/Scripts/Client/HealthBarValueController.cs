@@ -49,6 +49,7 @@ public class HealthBarValueController : MonoBehaviour
 ////        {
 ////            weaponsFxWriter.SendShowEffectEvent(new Effect(EffectEnum.DAMAGE));
 ////        }
+//          //#20 - Update the UI element
 ////        foregroundImage.fillAmount = fillAmount;
 //        
 //    }

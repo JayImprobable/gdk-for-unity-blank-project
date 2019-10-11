@@ -33,6 +33,7 @@ public class HealthBarValueControllerNonAuthoritative : MonoBehaviour
 //        }
 //        float fillAmount = (float)update.Health.Value / 100;
 //        
+          //#20 - update the UI element
 //        foregroundImage.fillAmount = fillAmount;
 //    }
 }
