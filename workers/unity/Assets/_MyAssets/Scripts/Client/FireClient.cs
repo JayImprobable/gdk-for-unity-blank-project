@@ -2,6 +2,8 @@
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
+////#17 - Class containing Components used in the class
+//using Tank;
 using UnityEngine;
 
 public class FireClient : MonoBehaviour
