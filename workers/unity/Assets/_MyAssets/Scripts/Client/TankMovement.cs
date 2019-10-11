@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Improbable.Gdk.Subscriptions;
-//#14 - Turret rotation input and synchronization
-using Tank;
+﻿using Improbable.Gdk.Subscriptions;
+////#14 - Turret rotation input and synchronization
+//using Tank;
 using UnityEngine;
 
 public class TankMovement : MonoBehaviour
 {
-    //#14 - Turret rotation input and synchronization
-    [Require] private TurretRotationWriter turretRotationWriter;
+//    //#14 - Turret rotation input and synchronization
+//    [Require] private TurretRotationWriter turretRotationWriter;
     
     [SerializeField] private float speed = 12f;
     [SerializeField] private float turnSpeed = 180f;
@@ -56,8 +53,8 @@ public class TankMovement : MonoBehaviour
     {
         Move();
         Turn();
-        //#14 - Turret rotation input and synchronization
-        TurnTurret();
+//        //#14 - Turret rotation input and synchronization
+//        TurnTurret();
     }
 
     private void Move()
@@ -76,18 +73,18 @@ public class TankMovement : MonoBehaviour
         rigidbody.MoveRotation(rigidbody.rotation * turnRotation);
     }
     
-    //#14 - Turret rotation input and synchronization
-    private void TurnTurret()
-    {
-        float rotation = turretTurnInput * turretTurnSpeed;
-        turret.transform.Rotate(0, rotation, 0);
-        if (turretTurnInput != 0)
-        {
-            var update = new TurretRotation.Update
-            {
-                Rotation = rotation
-            };
-            turretRotationWriter.SendUpdate(update);
-        }
-    }
+//    //#14 - Turret rotation input and synchronization
+//    private void TurnTurret()
+//    {
+//        float rotation = turretTurnInput * turretTurnSpeed;
+//        turret.transform.Rotate(0, rotation, 0);
+//        if (turretTurnInput != 0)
+//        {
+//            var update = new TurretRotation.Update
+//            {
+//                Rotation = rotation
+//            };
+//            turretRotationWriter.SendUpdate(update);
+//        }
+//    }
 }

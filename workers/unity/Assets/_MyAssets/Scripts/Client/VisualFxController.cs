@@ -1,5 +1,4 @@
-﻿using Improbable.Gdk.Core;
-using Improbable.Gdk.Subscriptions;
+﻿using Improbable.Gdk.Subscriptions;
 using Tank;
 using UnityEngine;
 
@@ -8,13 +7,13 @@ public class VisualFxController : MonoBehaviour
     [SerializeField] private GameObject machineGunFx;
     [SerializeField] private GameObject damageFx;
     [SerializeField] private GameObject healFx;
-    //#21 - Setting the WeaponsFxReader instace
-    [Require] private WeaponsFxReader weaponsFxReader;
+//    //#21 - Setting the WeaponsFxReader instace
+//    [Require] private WeaponsFxReader weaponsFxReader;
 
     private void OnEnable()
     {
-        //#21 - Setting the callback for the ShowEffect Event
-        weaponsFxReader.OnShowEffectEvent += ShowEffect;
+//        //#21 - Setting the callback for the ShowEffect Event
+//        weaponsFxReader.OnShowEffectEvent += ShowEffect;
     }
 
     private void ShowEffect(Effect effect)

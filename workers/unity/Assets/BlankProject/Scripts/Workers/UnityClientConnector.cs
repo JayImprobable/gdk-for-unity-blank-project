@@ -1,10 +1,10 @@
 ﻿using System;
 using Improbable.Gdk.Core;
-//#6 - Adding the systems to the worker
-using Improbable.Gdk.GameObjectCreation;
+////#6 - Adding the systems to the worker
+//using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
-//#10 - Adding the Transform Synchronization systems to the worker
-using Improbable.Gdk.TransformSynchronization;
+////#10 - Adding the Transform Synchronization systems to the worker
+//using Improbable.Gdk.TransformSynchronization;
 using Improbable.Worker.CInterop;
 using UnityEngine;
 
@@ -14,8 +14,8 @@ namespace BlankProject
     {
         public const string WorkerType = "UnityClient";
         
-        //#8 - GameObject prefab to be instantiated and variable to hold the instantiated level
-        [SerializeField] private GameObject level;
+//        //#8 - GameObject prefab to be instantiated and variable to hold the instantiated level
+//        [SerializeField] private GameObject level;
         private GameObject levelInstance;
 
         private async void Start()
@@ -51,37 +51,36 @@ namespace BlankProject
 
         protected override void HandleWorkerConnectionEstablished()
         {
-            //#4 - Adding the Player Lifecycle system to the worker
-            PlayerLifecycleHelper.AddClientSystems(Worker.World);
+//            //#4 - Adding the Player Lifecycle system to the worker
+//            PlayerLifecycleHelper.AddClientSystems(Worker.World);
             
             //#6 - Adding the systems to the worker
             //GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
             
-            //#12 - Setting the custom GameObject creator
-            var fallbackCreator = new GameObjectCreatorFromMetadata(Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);
-            var customCreator = new CustomGameObjectCreator(fallbackCreator, Worker.World, Worker.WorkerType, Worker.Origin);
+//            //#12 - Setting the custom GameObject creator
+//            var fallbackCreator = new GameObjectCreatorFromMetadata(Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);
+//            var customCreator = new CustomGameObjectCreator(fallbackCreator, Worker.World, Worker.WorkerType, Worker.Origin);
+//            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World, customCreator);
             
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World, customCreator);
-            
-            //#10 - Adding the Transform Synchronization systems to the worker
-            TransformSynchronizationHelper.AddClientSystems(Worker.World);
+//            //#10 - Adding the Transform Synchronization systems to the worker
+//            TransformSynchronizationHelper.AddClientSystems(Worker.World);
 
-            //#8 - Instantiating the level
-            if (level == null)
-            {
-                return;
-            }
-            levelInstance = Instantiate(level, transform.position, transform.rotation);
+//            //#8 - Instantiating the level
+//            if (level == null)
+//            {
+//                return;
+//            }
+//            levelInstance = Instantiate(level, transform.position, transform.rotation);
         }
         
-        //#8 - This method destroys the level instance once the worker is destroyed
-        public override void Dispose()
-        {
-            if (levelInstance != null)
-            {
-                Destroy(levelInstance);
-            }
-            base.Dispose();
-        }
+//        //#8 - This method destroys the level instance once the worker is destroyed
+//        public override void Dispose()
+//        {
+//            if (levelInstance != null)
+//            {
+//                Destroy(levelInstance);
+//            }
+//            base.Dispose();
+//        }
     }
 }
