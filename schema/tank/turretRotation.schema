@@ -1,7 +1,0 @@
-package tank;
-
-component TurretRotation
-{
-    id = 20001;
-    float rotation = 1;
-}
