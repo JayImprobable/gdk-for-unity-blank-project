@@ -1,20 +1,24 @@
 ﻿using Improbable.Gdk.Subscriptions;
-using Tank;
+////#14 - class that contains the TurretRotationReader Component
+//using Tank;
 using UnityEngine;
 
 public class TurretRotationUpdateReceiver : MonoBehaviour
 {
-    [Require] private TurretRotationReader turretRotationReader;
+//    //#14 - TurretRotationReader used to receive Updates
+//    [Require] private TurretRotationReader turretRotationReader;
 
     [SerializeField] private Transform turretTransform;
     
     void OnEnable()
     {
-        turretRotationReader.OnUpdate += UpdateReceived;
+//        //#14 - Setting the Update callback
+//        turretRotationReader.OnUpdate += UpdateReceived;
     }
 
-    void UpdateReceived(TurretRotation.Update update)
-    {
-        turretTransform.Rotate(0, update.Rotation, 0);
-    }
+//    //#14 - Update Callback
+//    void UpdateReceived(TurretRotation.Update update)
+//    {
+//        turretTransform.Rotate(0, update.Rotation, 0);
+//    }
 }

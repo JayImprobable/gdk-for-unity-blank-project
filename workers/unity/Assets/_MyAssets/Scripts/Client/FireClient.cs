@@ -2,7 +2,6 @@
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
-using Tank;
 using UnityEngine;
 
 public class FireClient : MonoBehaviour

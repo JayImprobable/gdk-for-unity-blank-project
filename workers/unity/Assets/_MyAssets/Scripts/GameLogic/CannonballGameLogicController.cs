@@ -1,7 +1,6 @@
 ﻿using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
 using Improbable.Gdk.Subscriptions;
-using Tank;
 using UnityEngine;
 
 public class CannonballGameLogicController : MonoBehaviour
@@ -24,7 +23,8 @@ public class CannonballGameLogicController : MonoBehaviour
                     {
                         if (updateHealth.enabled)
                         {
-                            updateHealth.TakeCannonballDamage(GameConstants.CannonDamage);
+//                            //#23 - Deal the cannonball damage
+//                            updateHealth.TakeCannonballDamage(GameConstants.CannonDamage);
                         }
                     }
                 }
@@ -37,9 +37,5 @@ public class CannonballGameLogicController : MonoBehaviour
             WorldCommands.DeleteEntity.Request request = new WorldCommands.DeleteEntity.Request(entityId);
             worldCommandSender.SendDeleteEntityCommand(request);
         }
-    }
-
-    private void HealthCommandResponseReceived(Tank.Health.UpdateHealth.ReceivedResponse response)
-    {
     }
 }

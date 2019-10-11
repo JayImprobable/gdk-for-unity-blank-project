@@ -1,11 +1,13 @@
-﻿using Tank;
+﻿////#23 - Class containing the FireCannonballReader
+//using Tank;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using UnityEngine;
 
 public class CannonballSpawner : MonoBehaviour
 {
-    [Require] private FireCannonballReader fireCannonball;
+//    //#23 - FireCannonaballReader is used to receive the event
+//    [Require] private FireCannonballReader fireCannonball;
 
     [SerializeField] private GameObject cannonFiringPoint;
     [SerializeField] private GameObject cannonballGameObject;
@@ -13,7 +15,8 @@ public class CannonballSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fireCannonball.OnFireEvent += FireEventReceived;
+//        //#23 - sets the callback to be used when the Fire event is received
+//        fireCannonball.OnFireEvent += FireEventReceived;
     }
 
     private void FireEventReceived(Empty e)

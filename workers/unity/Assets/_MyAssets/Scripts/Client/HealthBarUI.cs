@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using BlankProject;
+﻿using BlankProject;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
-using Tank;
 using UnityEngine;
-using UnityEngine.UI;
 
 [WorkerType(UnityClientConnector.WorkerType)]
 public class HealthBarUI : MonoBehaviour

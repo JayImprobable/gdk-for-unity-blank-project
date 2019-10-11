@@ -1,5 +1,6 @@
 ﻿using Improbable.Gdk.Subscriptions;
-using Tank;
+////#21 - Class that contains the weaponsFxReader Component
+//using Tank;
 using UnityEngine;
 
 public class VisualFxController : MonoBehaviour
@@ -16,23 +17,23 @@ public class VisualFxController : MonoBehaviour
 //        weaponsFxReader.OnShowEffectEvent += ShowEffect;
     }
 
-    private void ShowEffect(Effect effect)
-    {
-        //#21 - Switch based on the payload of the Event
-        switch (effect.EffectType)
-        {
-            case EffectEnum.MACHINE_GUN:
-                machineGunFx.GetComponent<ParticleSystem>().Play();
-                break;
-            
-            case EffectEnum.DAMAGE:
-                damageFx.GetComponent<ParticleSystem>().Play();
-                break;
-            
-            case EffectEnum.HEAL:
-                healFx.GetComponent<ParticleSystem>().Play();
-                break;
-        }
-        
-    }
+//    //#21 - Event callback
+//    private void ShowEffect(Effect effect)
+//    {
+//        //#21 - Switch based on the payload of the Event
+//        switch (effect.EffectType)
+//        {
+//            case EffectEnum.MACHINE_GUN:
+//                machineGunFx.GetComponent<ParticleSystem>().Play();
+//                break;
+//            
+//            case EffectEnum.DAMAGE:
+//                damageFx.GetComponent<ParticleSystem>().Play();
+//                break;
+//            
+//            case EffectEnum.HEAL:
+//                healFx.GetComponent<ParticleSystem>().Play();
+//                break;
+//        }
+//    }
 }
