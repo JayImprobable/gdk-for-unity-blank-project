@@ -1,3 +1,5 @@
+package tank;
+
 enum EffectEnum 
 {
     MACHINE_GUN = 0;
