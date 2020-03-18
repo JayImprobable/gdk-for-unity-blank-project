@@ -10,7 +10,8 @@
         "Unity.Mathematics",
         "Improbable.Gdk.GameObjectCreation",
         "Improbable.Gdk.TransformSynchronization",
-        "Improbable.Gdk.QueryBasedInterestHelper"
+        "Improbable.Gdk.QueryBasedInterestHelper",
+        "Unity.Transforms"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

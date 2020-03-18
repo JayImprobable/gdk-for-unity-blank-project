@@ -49,6 +49,7 @@ namespace BlankProject
 
         protected override void HandleWorkerConnectionEstablished()
         {
+            Worker.World.GetOrCreateSystem<TankMovementSystem>();
             PlayerLifecycleHelper.AddClientSystems(Worker.World);
             
             var fallbackCreator = new GameObjectCreatorFromMetadata(Worker.WorkerType, Worker.Origin, Worker.LogDispatcher);

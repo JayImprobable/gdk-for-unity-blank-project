@@ -1,0 +1,9 @@
+package tank;
+
+component TankVelocityAndRotation
+{
+    id = 20010;
+
+    float velocity = 1;
+    int32 turret_turn_input = 2;
+}

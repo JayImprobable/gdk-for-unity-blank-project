@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
-using Improbable.Gdk.QueryBasedInterest;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Worker.CInterop;
 using Tank;

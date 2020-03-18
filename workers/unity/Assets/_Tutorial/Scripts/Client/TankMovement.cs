@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Improbable.Gdk.Subscriptions;
+using Improbable.Gdk.QueryBasedInterest;
+using Improbable;
 using Tank;
 using UnityEngine;
 
 public class TankMovement : MonoBehaviour
 {
     [Require] private TurretRotationWriter turretRotationWriter;
-    
+    //[Require] private InterestReader interestReader;
+
     [SerializeField] private float speed = 12f;
     [SerializeField] private float turnSpeed = 180f;
     [SerializeField] private float turretTurnSpeed = 180f;
@@ -26,7 +29,13 @@ public class TankMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         movementInput = 0;
         turnInput = 0;
+        //interestReader.OnUpdate += OnInterestUpdate;
     }
+
+    //private void OnInterestUpdate(Interest.Update update)
+    //{
+    //    Debug.Log("!!!UPDATE!!!");
+    //}
 
     // Update is called once per frame
     void Update()
@@ -59,18 +68,18 @@ public class TankMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 movement = transform.forward * movementInput * speed * Time.deltaTime;
+        //Vector3 movement = transform.forward * movementInput * speed * Time.deltaTime;
         
-        rigidbody.MovePosition(rigidbody.position + movement);
+        //rigidbody.MovePosition(rigidbody.position + movement);
     }
 
     private void Turn()
     {
-        float turn = turnInput * turnSpeed * Time.deltaTime;
+        //float turn = turnInput * turnSpeed * Time.deltaTime;
         
-        Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
+        //Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
         
-        rigidbody.MoveRotation(rigidbody.rotation * turnRotation);
+        //rigidbody.MoveRotation(rigidbody.rotation * turnRotation);
     }
 
     private void TurnTurret()
