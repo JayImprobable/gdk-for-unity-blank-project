@@ -22,6 +22,14 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         typeof(Rigidbody),
         typeof(MeshRenderer)
     };
+    
+    public void PopulateEntityTypeExpectations(EntityTypeExpectations entityTypeExpectations)
+    {
+        entityTypeExpectations.RegisterDefault(new[]
+        {
+            typeof(Position.Component)
+        });
+    }
 
     public CustomGameObjectCreator(IEntityGameObjectCreator fallbackCreator, World world, string workerType, Vector3 workerOrigin, ILogDispatcher logger)
     {
@@ -32,7 +40,7 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         this.logger = logger;
     }
 
-    public void OnEntityCreated(SpatialOSEntity entity, EntityGameObjectLinker linker)
+    public void OnEntityCreated(string entityType, SpatialOSEntity entity, EntityGameObjectLinker linker)
     {
         if (!entity.HasComponent<Metadata.Component>())
         {
@@ -50,7 +58,7 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
                 break;
 
             default:
-                fallbackCreator.OnEntityCreated(entity, linker);
+                fallbackCreator.OnEntityCreated(entity.GetComponent<Metadata.Component>().EntityType, entity, linker);
                 break;
         }
     }

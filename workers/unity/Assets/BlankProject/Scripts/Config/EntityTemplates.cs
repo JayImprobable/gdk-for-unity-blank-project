@@ -11,7 +11,7 @@ namespace BlankProject.Scripts.Config
 {
     public static class EntityTemplates
     {
-        public static EntityTemplate CreatePlayerEntityTemplate(string workerId, byte[] serializedArguments)
+        public static EntityTemplate CreatePlayerEntityTemplate(EntityId id, string workerId, byte[] serializedArguments)
         {
             IList<Vector3> spawnPoints = new List<Vector3>();
             spawnPoints.Add(new Vector3(-35, 0, 20));
