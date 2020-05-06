@@ -15,16 +15,6 @@
       {
         "layer": "UnityGameLogic",
         "rectangle_grid": {
-          "cols": 2,
-          "rows": 1
-        },
-        "options": {
-          "manual_worker_connection_only": true
-        }
-      },
-      {
-        "layer": "UnityHealer",
-        "rectangle_grid":{
           "cols": 1,
           "rows": 1
         },
@@ -32,6 +22,7 @@
           "manual_worker_connection_only": true
         }
       }
+
     ]
   },
   "workers": [
@@ -45,22 +36,6 @@
     },
     {
       "worker_type": "UnityClient",
-      "permissions": [
-        {
-          "all": {}
-        }
-      ]
-    },
-    {
-      "worker_type": "MobileClient",
-      "permissions": [
-        {
-          "all": {}
-        }
-      ]
-    },
-    {
-      "worker_type": "UnityHealer",
       "permissions": [
         {
           "all": {}

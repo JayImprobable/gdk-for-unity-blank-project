@@ -60,21 +60,27 @@ namespace BlankProject.Editor
 
         private static void AddHealer(Snapshot snapshot)
         {
-            var healerAttribute = UnityHealerConnector.WorkerType;
+//            var healerAttribute = UnityHealerConnector.WorkerType;
+            var serverAttribute = UnityGameLogicConnector.WorkerType;
             
             var healer = new Healer.HealValue.Snapshot(GameConstants.HealerValue);
             var template = new EntityTemplate();
-            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
-            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
-            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
-            template.AddComponent(healer, healerAttribute);
+//            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), healerAttribute);
+//            template.AddComponent(new Metadata.Snapshot("Healer"), healerAttribute);
+//            template.AddComponent(new Persistence.Snapshot(), healerAttribute);
+//            template.AddComponent(healer, healerAttribute);
+            template.AddComponent(new Position.Snapshot(new Coordinates(6, 2, 0)), serverAttribute);
+            template.AddComponent(new Metadata.Snapshot("Healer"), serverAttribute);
+            template.AddComponent(new Persistence.Snapshot(), serverAttribute);
+            template.AddComponent(healer, serverAttribute);
             
             template.SetReadAccess(
                 UnityClientConnector.WorkerType,
                 UnityGameLogicConnector.WorkerType,
                 MobileClientWorkerConnector.WorkerType,
                 UnityHealerConnector.WorkerType);
-            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
+//            template.SetComponentWriteAccess(EntityAcl.ComponentId, healerAttribute);
+            template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             snapshot.AddEntity(template);
         }

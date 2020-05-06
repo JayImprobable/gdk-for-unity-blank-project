@@ -33,8 +33,7 @@ namespace BlankProject.Scripts.Config
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
-            template.AddComponent(CreateOtherPlayerQuery().ToSnapshot(), serverAttribute);
-
+            
             template.AddComponent(turretRotationComponent, clientAttribute);
             template.AddComponent(colorComponent, clientAttribute);
             template.AddComponent(healthComponent, serverAttribute);
@@ -42,6 +41,7 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(weaponsFxComponent, clientAttribute);
             template.AddComponent(fireCannon, clientAttribute);
             template.AddComponent(tankVelocity, clientAttribute);
+            template.AddComponent(CreateQuery().ToSnapshot(), clientAttribute);
 
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
@@ -53,21 +53,14 @@ namespace BlankProject.Scripts.Config
             return template;
         }
 
-        public static InterestTemplate CreateOtherPlayerQuery()
+        public static InterestTemplate CreateQuery()
         {
-            //var healerQuery = InterestQuery.Query(
-            //    Constraint.All(
-            //        Constraint.Component<Healer.HealValue.Component>(),
-            //        Constraint.RelativeSphere(20)))
-            //    .FilterResults(Position.ComponentId).WithMaxFrequencyHz(2);
+            var radiusQuery = InterestQuery.Query(Constraint.RelativeSphere(100));
 
-            var playerQuery = InterestQuery.Query(
-                Constraint.All(
-                    Constraint.Component<Health.Component>(),
-                    Constraint.RelativeSphere(50)))
-                .FilterResults(Position.ComponentId).WithMaxFrequencyHz(2);
+            InterestTemplate interestTemplate =
+                InterestTemplate.Create().AddQueries<TankColor.Component>(radiusQuery);
 
-            return InterestTemplate.Create().AddQueries<Position.Component>(playerQuery);
+            return interestTemplate;
         }
     }
 }

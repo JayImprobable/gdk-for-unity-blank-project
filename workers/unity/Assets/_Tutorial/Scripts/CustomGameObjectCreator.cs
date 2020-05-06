@@ -25,10 +25,17 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
     
     public void PopulateEntityTypeExpectations(EntityTypeExpectations entityTypeExpectations)
     {
-        entityTypeExpectations.RegisterDefault(new[]
+        entityTypeExpectations.RegisterEntityType("Player", new[]
         {
             typeof(Position.Component)
         });
+        
+        entityTypeExpectations.RegisterEntityType("Healer", new[]
+        {
+            typeof(Position.Component)
+        });
+        
+        fallbackCreator.PopulateEntityTypeExpectations(entityTypeExpectations);
     }
 
     public CustomGameObjectCreator(IEntityGameObjectCreator fallbackCreator, World world, string workerType, Vector3 workerOrigin, ILogDispatcher logger)
@@ -46,7 +53,7 @@ public class CustomGameObjectCreator : IEntityGameObjectCreator
         {
             return;
         }
-
+        
         switch (entity.GetComponent<Metadata.Component>().EntityType)
         {
             case "Player":
