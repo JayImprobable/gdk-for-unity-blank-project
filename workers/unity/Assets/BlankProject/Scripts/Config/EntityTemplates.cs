@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
-using Improbable.Gdk.QueryBasedInterest;
 using Improbable.Gdk.TransformSynchronization;
+using Improbable.Gdk.QueryBasedInterest;
 using Tank;
 using UnityEngine;
 
@@ -28,10 +28,12 @@ namespace BlankProject.Scripts.Config
             var weaponsComponent = new Weapons.Snapshot(GameConstants.MachineGunDamage, GameConstants.CannonDamage);
             var weaponsFxComponent = new WeaponsFx.Snapshot();
             var fireCannon = new FireCannonball.Snapshot();
+            var tankVelocity = new TankVelocityAndRotation.Snapshot();
 
             var template = new EntityTemplate();
             template.AddComponent(new Position.Snapshot(position.ToCoordinates()), clientAttribute);
             template.AddComponent(new Metadata.Snapshot("Player"), serverAttribute);
+            template.AddComponent(CreateOtherPlayerQuery().ToSnapshot(), serverAttribute);
 
             template.AddComponent(turretRotationComponent, clientAttribute);
             template.AddComponent(colorComponent, clientAttribute);
@@ -39,6 +41,7 @@ namespace BlankProject.Scripts.Config
             template.AddComponent(weaponsComponent, serverAttribute);
             template.AddComponent(weaponsFxComponent, clientAttribute);
             template.AddComponent(fireCannon, clientAttribute);
+            template.AddComponent(tankVelocity, clientAttribute);
 
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, serverAttribute);
@@ -48,6 +51,23 @@ namespace BlankProject.Scripts.Config
             template.SetComponentWriteAccess(EntityAcl.ComponentId, serverAttribute);
 
             return template;
+        }
+
+        public static InterestTemplate CreateOtherPlayerQuery()
+        {
+            //var healerQuery = InterestQuery.Query(
+            //    Constraint.All(
+            //        Constraint.Component<Healer.HealValue.Component>(),
+            //        Constraint.RelativeSphere(20)))
+            //    .FilterResults(Position.ComponentId).WithMaxFrequencyHz(2);
+
+            var playerQuery = InterestQuery.Query(
+                Constraint.All(
+                    Constraint.Component<Health.Component>(),
+                    Constraint.RelativeSphere(50)))
+                .FilterResults(Position.ComponentId).WithMaxFrequencyHz(2);
+
+            return InterestTemplate.Create().AddQueries<Position.Component>(playerQuery);
         }
     }
 }
